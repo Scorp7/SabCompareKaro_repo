@@ -1,0 +1,24 @@
+@media only screen and (min-width : 320px) and (max-width : 480px){
+    .carousel-control-prev, .carousel-control-next{
+        display: none;
+    }
+}
+
+@media only screen and (max-width : 768px){
+
+}
+
+@media only screen and (max-width : 900px){
+    .carousel-inner{
+        height: auto!important;
+    }
+    form{
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width : 1200px){
+    
+}
