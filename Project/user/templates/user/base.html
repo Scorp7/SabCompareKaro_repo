@@ -13,11 +13,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
         <!-- Custom Css File -->
-        <link rel="stylesheet" href="{% static 'css/uidev.css' %}">
+        <link rel="stylesheet" href="{% static 'user/css/uidev.css' %}">
         <!-- Custom js File  -->
-        <script src="{% static 'js/uidev.js' %}"></script>
+        <script src="{% static 'user/js/uidev.js' %}"></script>
         <!-- Responsive CSS File  -->
-        <link rel="stylesheet" href="css/{% static 'css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static 'user/css/responsive.css' %}">
         
         {% block title %}  
         {% endblock title %}
@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="img/logo.png" alt="logo">
+                    <img src="{% static 'user/images/logo.jpg' %}" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -49,35 +49,38 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>
                         </li>
+                        {% comment %} <li>
+                            <input class="form-control navbar-nav mx-auto col-lg-5 search-bar" type="search" placeholder="Search" aria-label="Search">
+                        </li>
+                        <li>
+                            <button type="submit" class="btn btn-link"><i class="fas fa-search"></i></button>
+                        </li> {% endcomment %}
                     </ul>
                     
                     
                     <!-- Search Bar   -->
-                    <form class="navbar-nav mx-auto col-lg-5 search-bar ">
+                     <form class="navbar-nav mx-auto col-lg-5 search-bar ">
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                         <button type="submit" class="btn btn-link"><i class="fas fa-search"></i></button>
-                    </form>
+                    </form> 
                     
                     <!-- Right navigation  -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                        <a class="nav-link"  href="#"><i class="fas fa-phone phone" ></i>+91 9594506089</a>
+                            <a class="nav-link"  href="#"><i class="fas fa-phone phone" ></i>+91 9594506089</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-envelope email" ></i>info@sck.com</a>
+                            <a class="nav-link" href="#"><i class="fas fa-envelope email" ></i>info@sck.com</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="#">Pricing</a>
                         </li>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#" id='login'>Login</a>
-                    </li>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#" id='signup'>Sign Up</a>
-                </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id='login'>Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id='signup'>Sign Up</a>
+                        </li>
                     </ul>
                     
                 </div>
