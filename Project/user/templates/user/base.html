@@ -13,10 +13,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     
+    {% comment %} Custom CSS  {% endcomment %}
+    <link rel="stylesheet" href="{% static 'user/css/custom.css' %}">
+    
     
 
     
-    <title> {% block title %}  Home {% endblock title %} | SabCompareKaro</title> 
+    <title> {% block title %}  Title {% endblock title %} | SabCompareKaro</title> 
     
     
     {% block extra_head %}  
@@ -50,7 +53,10 @@
         
     {% block extra_body %}  
     {% endblock extra_body %}
-        
+    
+    
+    {% comment %}  Footer  {% endcomment %}
+    {% include 'user/includes/footer.html' %}   
     
   </body>
 </html>
