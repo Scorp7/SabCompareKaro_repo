@@ -8,7 +8,7 @@ def home(request):
     context = {
             "su": User.objects.filter(is_superuser=True).values_list('username')
         }
-    return render(request,'user/home.html', context)
+    return render(request,'home/home.html', context)
     
 def login(request):
-    return render(request, 'user/login.html')
+    return render(request, 'home/login.html')
