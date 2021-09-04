@@ -1,0 +1,52 @@
+{% load static %}
+
+<nav class="navbar fixed-top scrolling-navbar navbar-expand-lg navbar-dark" style="background-color:rgba(0,0,0,.2)">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="{% static 'user/images/cart.png' %}" height='30' width='35' alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+            <!-- Left navigation  -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+                <li class="nav-item">
+                    <a class="nav-link"  href="#">Home</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="#">About Us</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="#">Services</a>
+                </li>
+                
+            </ul>
+            
+            <!-- Center(serch_bar) navigation  -->
+            <ul class="navbar-nav me-auto">
+                <li>
+                    <form class="d-flex col-xs-10">
+                        <input class="form-control me-2" type="search" placeholder="Search..." alt="Search For Your Product Here">
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            
+            
+            <!-- Right navigation  -->
+            <div>
+                <a href="#"><img src="{% static 'user/images/wallet.png' %}" height='30' width='35' alt=""></a>
+                <button type="button" class="btn mx-3 btn-success"><a style="color:white; text-decoration:none" href="{% url "account_login" %}">Login</a></button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signupModal"><a style="color:white; text-decoration:none" href="{% url "account_signup" %}">Sign Up</a></button>
+            </div>
+                
+        </div>
+        
+    </div>
+</nav>
