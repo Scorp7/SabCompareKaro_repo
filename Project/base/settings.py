@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 ]
 
 
-SITE_ID = 2
+SITE_ID = 1
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
@@ -63,13 +63,14 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': '1068857133350-mj7e2pe94eckg6cglvghvmr6sa73426r.apps.googleusercontent.com',
+            'secret': 'RbTg5MaT3vrsLO7tL5wxl_vd',
             'key': ''
         }
     }
 }
 
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
