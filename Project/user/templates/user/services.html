@@ -1,0 +1,71 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block title %} 
+Services
+{% endblock title %}
+
+
+{% block extra_head %}  
+{% endblock extra_head %}
+
+
+
+
+{% block content %}  
+    
+    <div class="container my-5">
+      <p class="fs-1 fw-bold text-center">Why To Use SabCompareKaro ?</p>
+        <!-- START THE FEATURETTES -->
+      <br> <br>
+      <p class="fs-3 fw-bold">You will get all of your answers here</p>
+      <hr class="featurette-divider"><br>
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading ">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
+          <p class="lead p-2">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+        </div>
+        <div class="col-md-5">
+          <img  class="rounded-pill" src={% static 'user/images/ftmoney.jpg' %} alt="">
+
+        </div>
+      </div>
+      <br>
+      <hr class="featurette-divider"><br>
+
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading ">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
+          <p class="lead p-2">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <img class="rounded-pill" src={% static 'user/images/ftg1.jpg' %} alt="">
+
+        </div>
+      </div>
+      <br>
+      <hr class="featurette-divider"><br>
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading ">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
+          <p class="lead p-2">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="rounded-pill" src={% static 'user/images/ftgopen.jpg' %} alt="">
+
+        </div>
+      </div>
+      <br>
+      <hr class="featurette-divider"><br><br>
+
+      <!-- /END THE FEATURETTES -->
+    </div>
+    
+{% endblock content %}
+
+
+{% block extra_body %}  
+{% endblock extra_body %} 
+    

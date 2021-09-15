@@ -40,17 +40,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'user.apps.UserConfig',
-    
     'django.contrib.sites',
-
+     
+     #All Auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # ... include the providers you want to enable:
+                    # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
+     
+     #Custom
+    'user.apps.UserConfig',
+    'admins.apps.AdminsConfig',
+    
+    #EXTRAS
+    'widget_tweaks',
+    
+
+
 ]
 
 
@@ -70,7 +78,26 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
+
+
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = 'phone'
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 8
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'mail.orgved.com'
+EMAIL_HOST_USER = 'test@orgved.com'
+EMAIL_HOST_PASSWORD = 'Test@Test.Com'
+EMAIL_PORT = 465
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,6 +108,21 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# MIDDLEWARE = [
+#     'django_hosts.middleware.HostsRequestMiddleware',
+#     'django.middleware.security.SecurityMiddleware',
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#     'requestlogs.middleware.RequestLogsMiddleware',
+#     'requestlogs.middleware.RequestIdMiddleware',
+#     'django_hosts.middleware.HostsResponseMiddleware'
+# ]
 
 ROOT_URLCONF = 'base.urls'
 

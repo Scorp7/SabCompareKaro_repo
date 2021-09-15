@@ -15,7 +15,7 @@
     
     
     {% comment %} Custom CSS  {% endcomment %}
-    <link rel="stylesheet" href="{% static 'user/css/custom.css' %}">
+    <link rel="stylesheet" href={% static 'user/css/custom.css' %}>
     
     
     
@@ -25,6 +25,18 @@
     <title> {% block title %}  Title {% endblock title %} | SabCompareKaro</title> 
     
     
+    <style>
+      .nav-collapse{background-color:#1C2331}
+      
+      .color-black{
+        color: grey;
+      }
+
+      .active{
+        font-size: 18px;
+        color: black;
+      }
+    </style>
     
     {% block extra_head %}  
     {% endblock extra_head %}

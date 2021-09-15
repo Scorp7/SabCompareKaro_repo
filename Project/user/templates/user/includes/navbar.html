@@ -1,10 +1,8 @@
 {% load static %}
 
-
-
-<nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top sticky-top" style="background-color:#F0FFFF">
+<nav class="navbar navbar-expand-lg navbar-fixed-top sticky-top" style="background-color:#F0FFFF">
     <div class="container-fluid">
-        <a class="navbar-brand ms-2 me-5" href="{% url 'home_url' %}"><img src="{% static 'user/images/cart.png' %}" height='30' width='35' alt=""></a>
+        <a class="navbar-brand ms-2 me-5" href="{% url 'home_url' %}"><img src="{% static 'user/images/logo.png' %}" height='35' width='170' alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,22 +13,26 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5 me-5 ">
           
                 <li class="nav-item">
-                    <a class="nav-link text-white me-3 text-reset fw-bold"  href="{% url 'home_url' %}">Home</a>
+                    <a class="nav-link me-3 color-black fw-bold {{home}}"  href={% url 'home_url' %}>Home</a>
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link text-white me-3 text-reset fw-bold" href="{% url 'about_url' %}">About</a>
+                    <a class="nav-link me-3 color-black fw-bold {{about}}" href="{% url 'about_url' %}">About</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link me-3 color-black fw-bold {{services}}" href="{% url 'services_url' %}">Services</a>
                 </li>
                 
                 <li class="nav-item me-5">
-                    <a class="nav-link text-white text-reset fw-bold" href="{% url 'contact_url' %}">Contact Us</a>
+                    <a class="nav-link color-black fw-bold {{contact}}" href="{% url 'contact_url' %}">Contact Us</a>
                 </li>
+                
                 <li>
-                   
-
-                     <form class="d-flex col-xs-10 ms-5">
-                        <input id="id_searchbox" class="form-control ms-5 me-2" type="search" placeholder="Search..." alt="Search For Your Product Here" style="width:30vw;border:0.5px solid black">
-                        <button class="btn btn-outline-success" type="submit">
+                    <form action="{% url 'search_url' %}" method="POST" class="d-flex col-xs-10 ">
+                        {% csrf_token %}
+                        <input id="id_searchbox" class="form-control ms-5 me-2 rounded-3" type="search" placeholder="Search..." alt="Search For Your Product Here" name="search_bar" style="width:29vw;border:0.5px solid black">
+                        <button class="btn btn-outline-success rounded-3" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
@@ -44,25 +46,26 @@
             
             <!-- Right navigation  -->
             <div>
-                {% if request.user.is_active %}
-                <div class="me-5">
-                <div class="btn-group">
-                    <a class="me-5 fs-2 text-reset" href="#"><i class="fas fa-wallet"></i></a>
-                    
-                        <a class="me-md-3 fs-2 text-reset" href="#" data-bs-toggle="dropdown" ><i class="far fa-user"></i></a>
+                {% if request.user.is_authenticated %}
+                <div class="me-2">
+                    <div class="btn-group">
+                        <strong class="fs-5 mt-md-2 me-5 text-capitalize"> Hello&nbsp {{request.user}} </strong>
+                        <a class="me-5 fs-2 text-reset" href="#"><i class="fas fa-wallet"></i></a>
+                        <a class="me-md-5 fs-2 text-reset" href="#" data-bs-toggle="dropdown" ><i class="far fa-user"></i></a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">My account</a></li>
+                                <li><a class="dropdown-item" href="#"></a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a></li>
                             </ul>
+                
                     </div>
                 </div>
                 {% else %}
                 <div class="me-3">  
-                    <a href="{% url "account_login" %}" class="btn btn-outline-success mx-3" role="button"> Login </a>  
-                    <a href="{% url "account_signup" %}" class="btn btn-warning" role="button"> Sign Up </a>  
+                    <a href="{% url "account_login" %}" class="btn btn-warning mx-md-3 rounded-pill pe-md-4 ps-md-4" role="button">  Login  </a>  
+                    <a href="{% url "account_signup" %}" class="btn btn-success rounded-pill pe-md-4 ps-md-4" role="button"> Sign Up </a>  
 
                     {% comment %} <button type="button" class="btn mx-3 btn-outline-success"><a style="color:white; text-decoration:none" href="{% url "account_login" %}">Login</a></button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signupModal"><a style="color:white; text-decoration:none" href="{% url "account_signup" %}">Sign Up</a></button>

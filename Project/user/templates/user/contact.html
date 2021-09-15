@@ -1,5 +1,7 @@
 {% extends 'user/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
+
 
 
 {% block title %} 
@@ -42,6 +44,15 @@ Contact
         
         
     }
+    
+    .vl {
+        border-left: 7px double black;
+        height: 90%;
+        margin-left: -5px;
+        
+    }
+    
+    
 </style>
 {% endblock extra_head %}
 
@@ -49,14 +60,22 @@ Contact
 
 
 {% block content %} 
+    {% if saved %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Successful!!!</strong> &nbsp &nbsp Your details were sent successfully!.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
 
-    <div class="container-contact row mt-md-5 mb-md-5 pt-5 pb-5 ">
-        <div class=" col-8 first-col offset-2 col-sm-8 col-md-8 col-lg-6 col-xl-3">
-            <div class="left-col pt-5 ps-4 pe-3 mt-3 mr-0">
+    <div class="container-contact row mt-md-5 mb-md-5 pt-5 pb-5 no-gutters">
+    
+        <div class=" col-8 first-col col-sm-8 col-md-8 col-xl-3 col-lg-6 offset-2">
+            <div class="left-col pt-5 ps-4 pe-3 mt-3 mr-0 vl">
                 <div class="text-center">
-                    <a class="" href="{% url 'home_url' %}"><img src="{% static 'user/images/cart.png' %}" height='30' width='75' alt=""></a>
+                    <a class="" href="{% url 'home_url' %}"><img src="{% static 'user/images/logo.png' %}" height='40' width='194' alt=""></a>
                 </div>
-                <h3 class="title mt-md-4" >Let's get in touch</h3>
+                <h3 class="title mt-md-4 fs-2" >Let's get in touch</h3>
+                
                 <p class="text fs-6 "> Contact us with the following details. and fillup the form with the details. </p>
                 <div class="info mt-md-4">
                     <div class="social-information fs-4"> <p><i class="fas fa-home me-3"></i>  Mumbai, India 421204</p>
@@ -68,7 +87,7 @@ Contact
                 </div>
                 <div class="social-media">
                     <p class="fs-5 mt-md-5 text-center">Connect with us </p>
-                    <div class="social-icons text-center "> 
+                    <div class="social-icons text-center"> 
                         <a
                             class="btn btn-primary btn-floating m-1 rounded-circle"
                             style="background-color: #3b5998;"
@@ -110,14 +129,16 @@ Contact
             </div>
         </div>
         
-        <div class="col-8 second-col col-sm-8 col-md-8 col-lg-6 col-xl-5 ">
+        <div class="col-8 second-col col-sm-8 col-md-8 col-xl-4 col-lg-6  ">
             <div class="right-col py-2 mt-3 ms-0 ">
                 <form method="POST" class="m-3">
                     {% csrf_token %}
                     <h3 class="title text-center mt-md-4 ">Contact us</h3>
                     <div class="mb-4">
-                        <label for="contactName" class="form-label mt-4"></label>
+                        <label for="name" class="form-label mt-4"></label>
                         <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name">
+                        {% comment %} {{form.name|add_class:"form-control"|attr:"placeholder:Email Or Phone"|attr:'id':"name"}}
+                        {{form.name.errors}} {% endcomment %}
                     </div>
                     
                     <div class="mb-4">
@@ -131,17 +152,15 @@ Contact
                         <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message"></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success mt-md-3 px-5 w-40" >Submit</button>
+                        <button type="submit" class="btn btn-warning mt-md-3 px-5 w-40 rounded-pill" >Submit</button>
                     </div>
                 </form>
             </div>
         </div>
+        
     </div>
 
 
-
-
-    {%
 {% endblock content %}
 
 
