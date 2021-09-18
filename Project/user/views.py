@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -119,15 +120,18 @@ def search1(request):
     return render(request, 'user/about.html')
     
  
+
+@login_required
 # Using Rainforest Api 
 def search_result(request):
+
     if request.method == 'POST':
         text = request.POST['search_bar']
         product_keywords = text.split(' ')
         print(product_keywords)
         # set up the request parameters
         params = {
-        'api_key': '13B9D500834949C5A8C2CCB492708330',
+        'api_key': 'D249F3DFEDC24A9183C7878F959A6605',
         'type': 'search',
         'amazon_domain': 'amazon.in',
         'search_term': text
@@ -137,7 +141,7 @@ def search_result(request):
         response = requests.get('https://api.rainforestapi.com/request', params).json()
         
         # print the JSON response from Rainforest API
-        print(response)
+        # print(response)
         
         found = 0
         for i in range(5):

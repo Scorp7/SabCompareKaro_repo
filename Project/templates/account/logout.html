@@ -155,7 +155,11 @@ Logout
                             {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                             {% endif %}
-                            <input class="btn btn-block Login-btn mb-4" type="submit" value="Logout">
+                            
+                            <input class="btn btn-danger mb-4 ps-3 pe-3" type="submit" value="Logout"> &nbsp &nbsp &nbsp
+                            <input type="button" onclick="location.href='{% url 'home_url' %}';" class="btn btn-success mb-4" value="Back To Home">
+                            
+                            
                         </form>
 
 

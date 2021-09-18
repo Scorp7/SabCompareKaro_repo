@@ -20,8 +20,8 @@ from . import settings
 
 urlpatterns = [
     path('root/', admin.site.urls),
+    path('admins/', include('admins.urls')),
     path('', include('user.urls')),
-    path('admin/', include('admins.urls')),
     path('accounts/', include('allauth.urls')),
     # path(r"^account/", include("django.contrib.auth.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

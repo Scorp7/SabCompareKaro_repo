@@ -1,0 +1,97 @@
+<div class="sidebar">
+    <div class="logo-details" >
+        <i class='bx bx-check-shield icon' ></i>
+        
+        <div class="logo_name">
+            {% comment %} <img src="{% static 'user/images/logo.png' %}" height='30' width='100' alt=""></a>
+             {% endcomment %}
+             <span>Admin Panel</span>
+        </div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+
+        {% comment %} <li>
+            <i class='bx bx-search' ></i>
+            <input type="text" placeholder="Search...">
+            <span class="tooltip">Search</span>
+        </li> {% endcomment %}
+        
+        {% comment %} <li>
+        <a href="#">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Dashboard</span>
+        </a>
+            <span class="tooltip">Dashboard</span>
+        </li>
+        {% endcomment %}
+        
+        <li class={{user}}>
+        <a href={% url 'user_detail_url' %} >
+            <i class='bx bx-user' ></i>
+            <span class="links_name ">User</span>
+        </a>
+        <span class="tooltip">User</span>
+        </li>
+        
+        <li class={{amazon}}>
+        <a href={% url 'amazon_deals_url' %}>
+        <i class='bx bx-grid-alt '></i>
+            <span class="links_name">Amazon Deals</span>
+        </a>
+        <span class="tooltip">Amazon Deals</span>
+        </li>
+        
+        <li class={{flipkart}}>
+        <a href={% url 'flipkart_deals_url' %}>
+        <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Flipkart Deals</span>
+        </a>
+        <span class="tooltip">Flipkart Deals</span>
+        </li>
+        
+        <li class={{snapdeal}}>
+        <a href={% url 'snapdeal_deals_url' %}>
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Snapdeal Deals</span>
+        </a>
+        <span class="tooltip">Snapdeal Deals</span>
+        </li>
+        
+        <li class={{contact}}>
+        <a href={% url 'contact_detail_url' %}>
+            <i class='bx bxs-contact'></i>
+            <span class="links_name">Contact Details</span>
+        </a>
+        <span class="tooltip">Contact Details</span>
+        </li>
+        
+        {% comment %} <li>
+        <a href="#">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">Saved</span>
+        </a>
+        <span class="tooltip">Saved</span>
+        </li>
+        <li>
+        <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Setting</span>
+        </a>
+        <span class="tooltip">Setting</span>
+        </li> {% endcomment %}
+        
+        <li class="profile">
+            <div class="profile-details">
+            <i class='bx bxs-user-account' ></i>
+            <div class="name_job">
+                <div class="name">Admin</div>
+                {% comment %} <div class="job">Admin</div> {% endcomment %}
+            </div>
+            </div>
+            <a href={% url 'account_logout' %}><i class='bx bx-log-out' id="log_out" ></i></a>
+            
+        </li>
+    </ul>
+</div>
+  

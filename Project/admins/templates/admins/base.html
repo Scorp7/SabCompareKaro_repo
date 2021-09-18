@@ -1,0 +1,59 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <title> Admin | {% block title %} {% endblock title %} | SabCompareKaro </title>
+    
+    
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static 'admins/css/style.css' %}">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% comment %} Bootstrap 5 {% endcomment %}
+    <link rel="stylesheet" href={% static 'admins/css/bootstrap.min.css' %}>
+     
+     {% block css %}{% endblock css %}
+     
+
+   </head>
+<body>
+  
+  {% include 'admins/includes/sidebar.html' %}
+  
+  <section class="home-section">
+
+      <nav class="navbar navbar-light bg-light" >
+        <div class="container-fluid">
+          <center class=" mb-0 h2" style="text-align:center;">{% block body_heading %}Heading{% endblock body_heading %}</center>
+        
+        {% if request.user.is_authenticated %}
+                <div class="me-2">
+                    <div class="btn-group">
+                        <strong class="fs-5 mt-md-2 me-md-5 text-capitalize"> Hello&nbsp {{request.user}} </strong>
+                    </div>
+                </div>
+                {% endif %}
+        </div>
+      </nav>
+    
+      {% block content %}
+      {% endblock content %}
+      
+  </section>
+  
+    
+    
+
+
+<script src="{% static 'admins/js/custom.js' %}"></script>
+  
+  
+</body>
+</html>

@@ -1,5 +1,6 @@
 {% extends 'user/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 
 {% block title %} 
@@ -15,6 +16,14 @@ About
 
 {% block content %}  
 About Us
+
+
+<!-- change input type (e.g. to HTML5) -->
+<div class="field {{ field|field_type }} {{ field|widget_type }} {{ field.html_name }}">
+    {{ field }}
+</div>
+<!-- add/change several attributes -->
+
 
 {% comment %} {% load account %}
 {% user_display user as user_d %}
