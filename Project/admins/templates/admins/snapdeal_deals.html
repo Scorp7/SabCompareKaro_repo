@@ -1,0 +1,81 @@
+{% extends 'admins/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+
+
+{% block body_heading %}{% endblock body_heading %}
+
+
+{% block content %}
+    <h2 class="text-center alert btn-dark">Snapdeal Deals Data</h2>
+    {% if status_edit %}
+        
+        <div class="alert alert-success alert-dismissible fade show"  role="alert">
+            <strong>SUCCESS!!!</strong> &nbsp&nbsp Saved Changes  Data for id: {{id}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {% endif %}
+    
+    {% if status_add %}
+        
+        <div class="alert alert-success alert-dismissible fade show"  role="alert">
+            <strong>SUCCESS!!!</strong> &nbsp&nbsp Added New Entry
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {% endif %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
+        <a href={% url 'add_snapdeal_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
+    </div>
+        {% if Data %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Modified Date</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Thumbnail</th>
+                    
+                </tr>
+                </thead>
+
+                <tbody>
+                    {% for dt in Data %}
+                        <tr>
+                            <th scope="row">{{dt.id}}</th>
+                            <td>{{dt.title}}</td>
+                            <td>{{dt.url}}</td>
+                            <td>{{dt.created_on}}</td>
+                            <td>{{dt.body}}</td>
+                            <td>{{dt.image}}</td>
+                            <td>
+                                <a href="{% url 'edit_snapdeal_url' dt.id %}" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
+                            </td>
+                            
+                            <td>
+                                <form action="{% url 'delete_snapdeal_url' dt.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+
+        {% else %}
+            <h2 class="text-center alert alert-warning">No Records </h2>
+
+        {% endif %}
+{% endblock content %}
+
+
+
+

@@ -1,0 +1,188 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+{% block title %} 
+Contact
+{% endblock title %}
+
+
+{% block extra_head %} 
+<style>
+
+    body{
+        background-color: #E5E4E2;
+    }
+    .first-col{
+        background-color: #E5E4E2;
+        height: 550px;
+        border-radius: 5% 0% 0% 5%;
+    }
+    
+    .second-col{
+        background-color: #E5E4E2;
+        height: 550px;
+        border-radius: 0% 4% 4% 0%;
+    }
+    
+    
+    .left-col{
+        background-color: #E5E4E2;
+        height: 510px;
+
+        
+    }
+    
+    .right-col{
+        background-color: white;;
+        border-radius: 5px;
+        height: 510px;
+        border-radius: 4% 4% 4% 4%;
+        
+        
+        
+    }
+    
+    .vl {
+        border-left: 7px double black;
+        height: 90%;
+        margin-left: -5px;
+        
+    }
+    
+    
+</style>
+{% endblock extra_head %}
+
+
+
+
+{% block content %} 
+    {% if saved %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Successful!!!</strong> &nbsp &nbsp Your details were sent successfully!.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    <div class="container-contact row mt-md-5 mb-md-5 pt-5 pb-5 no-gutters">
+    
+        <div class=" col-8 first-col col-sm-8 col-md-8 col-xl-3 col-lg-6 offset-2">
+            <div class="left-col pt-5 ps-4 pe-3 mt-3 mr-0 vl">
+                <div class="text-center">
+                    <a class="" href="{% url 'home_url' %}"><img src="{% static 'user/images/logo.png' %}" height='40' width='194' alt=""></a>
+                </div>
+                <h3 class="title mt-md-4 fs-2" >Let's get in touch</h3>
+                
+                <p class="text fs-6 "> Contact us with the following details. and fillup the form with the details. </p>
+                <div class="info mt-md-4">
+                    <div class="social-information fs-4"> <p><i class="fas fa-home me-3"></i>  Mumbai, India 421204</p>
+                    </div>
+                    <div class="social-information fs-4"> <p><i class="fas fa-envelope me-3"></i>  sabcomparekaro@gmail.com</p>
+                    </div>
+                    <div class="social-information fs-4"> <p><i class="fas fa-mobile me-3"></i>+91 959 450 6089 </p>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <p class="fs-5 mt-md-5 text-center">Connect with us </p>
+                    <div class="social-icons text-center"> 
+                        <a
+                            class="btn btn-primary btn-floating m-1 rounded-circle"
+                            style="background-color: #3b5998;"
+                            {% comment %} href="https://www.facebook.com/sabcomparekaro" {% endcomment %}
+                            href="#"
+                            role="button"
+                            ><i class="fab fa-facebook-f"></i
+                        ></a>
+
+                        <!-- Twitter -->
+                        <a
+                            class="btn btn-primary btn-floating m-1 rounded-circle"
+                            style="background-color: #55acee;"
+                            href="https://twitter.com/sabcomparekaro"
+                            role="button"
+                            ><i class="fab fa-twitter"></i
+                        ></a>
+
+                        <!-- Instagram -->
+                        <a
+                            class="btn btn-primary btn-floating m-1 rounded-circle"
+                            style="background-color: #ac2bac;"
+                            href="https://www.instagram.com/sabcomparekaro/"
+                            role="button"
+                            ><i class="fab fa-instagram"></i
+                        ></a>
+
+                        <!-- Linkedin -->
+                        <a
+                            class="btn btn-primary btn-floating m-1 rounded-circle"
+                            style="background-color: #0082ca;"
+                            href="https://www.linkedin.com/in/sabcomparekaro-a85649215/"
+                            role="button"
+                            ><i class="fab fa-linkedin-in"></i
+                        ></a> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-8 second-col col-sm-8 col-md-8 col-xl-4 col-lg-6  ">
+            <div class="right-col py-2 mt-3 ms-0 ">
+                <form method="POST" class="m-3">
+                    {% csrf_token %}
+                    <h3 class="title text-center mt-md-4 ">Contact us</h3>
+                    
+                    {% if request.user.is_authenticated %}
+                    
+                    <div class="mb-4">
+                        <label for="name" class="form-label mt-4"></label>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}}>
+                        {% comment %} {{form.name|add_class:"form-control"|attr:"placeholder:Email Or Phone"|attr:'id':"name"}}
+                        {{form.name.errors}} 
+                        {% render_field form.email %} {% endcomment %}
+                    </div>
+                    <div class="mb-4">
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}}>
+                    </div>
+                    
+                    {% else %}
+                    
+                    <div class="mb-4">
+                        <label for="name" class="form-label mt-4"></label>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}}>
+                        {% comment %} {{form.name|add_class:"form-control"|attr:"placeholder:Email Or Phone"|attr:'id':"name"}}
+                        {{form.name.errors}} 
+                        {% render_field form.email %} {% endcomment %}
+                    </div>
+                    <div class="mb-4">
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}}>
+                    </div>
+                    
+                    {% endif %}
+
+                    <div class="mb-4">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
+                    </div>
+                    <div class="mb-4">
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning mt-md-3 px-5 w-40 rounded-pill" >Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+
+{% endblock content %}
+
+
+{% block extra_body %}  
+
+{% endblock extra_body %} 
+    

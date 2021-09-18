@@ -1,0 +1,46 @@
+{% extends 'admins/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+
+
+{% block body_heading %}{% endblock body_heading %}
+
+
+{% block content %}
+    
+    <h2 class="text-center alert btn-dark ">Edit User Detail</h2>
+    
+    <div class="col-6 offset-3">
+        {% if Data %}
+            <form action="{% url 'edit_user_url' Data.id %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="abc" value={{Data.username}}>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" value={{Data.email}}>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value={{Data.password}}>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <input onclick="location.href='{% url 'user_detail_url' %}';" type="button" class="btn btn-secondary mx-4" value="Back"></input>
+                
+                
+            </form>
+        {% else %}
+            <h2 class="text-center alert alert-warning">No Records </h2>
+
+        {% endif %}
+    </div>    
+{% endblock content %}
+
+
+
+

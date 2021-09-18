@@ -1,0 +1,50 @@
+{% extends 'admins/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+
+
+{% block body_heading %}{% endblock body_heading %}
+
+
+{% block content %}
+    
+    <h2 class="text-center alert btn-dark ">Edit Contact Detail</h2>
+    
+    <div class="col-6 offset-3">
+        {% if Data %}
+            <form action="{% url 'edit_contact_url' Data.id %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" value={{Data.name}}>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" value={{Data.email}}>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="phone" value={{Data.phone}}>
+                </div>
+                <div class="mb-5">
+                    <label for="exampleInputPassword1" class="form-label">Message</label>
+                    <textarea name="message" class="form-control" rows=4 >{{Data.message}}</textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <input onclick="location.href='{% url 'contact_detail_url' %}';" type="button" class="btn btn-secondary mx-4" value="Back"></input>
+                
+                
+            </form>
+        {% else %}
+            <h2 class="text-center alert alert-warning">No Records </h2>
+
+        {% endif %}
+    </div>    
+{% endblock content %}
+
+
+
+

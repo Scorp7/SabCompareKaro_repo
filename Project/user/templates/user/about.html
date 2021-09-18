@@ -1,0 +1,37 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block title %} 
+About 
+{% endblock title %}
+
+
+{% block extra_head %}  
+{% endblock extra_head %}
+
+
+
+
+{% block content %}  
+About Us
+
+
+<!-- change input type (e.g. to HTML5) -->
+<div class="field {{ field|field_type }} {{ field|widget_type }} {{ field.html_name }}">
+    {{ field }}
+</div>
+<!-- add/change several attributes -->
+
+
+{% comment %} {% load account %}
+{% user_display user as user_d %}
+<p><strong>Note:</strong> you are already logged in as {{ user_d }}.</p> {% endcomment %}
+
+{% endblock content %}
+
+
+{% block extra_body %}  
+{% endblock extra_body %} 
+    
