@@ -10,7 +10,7 @@
 
         <h2 class="text-center alert btn-dark ">Show User Data</h2>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
-            <a href={% url 'home_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
+            <a href={% url 'add_user_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
         </div>
         
         {% if Data %}
@@ -32,7 +32,7 @@
                             <td>{{dt.email}}</td>
                             <td>{{dt.password}}</td>
                             <td>
-                                <a href="" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
+                                <a href="{% url 'edit_user_url' dt.id %}" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
                             </td>
                             
                             <td>

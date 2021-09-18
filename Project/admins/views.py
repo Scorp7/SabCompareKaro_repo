@@ -17,7 +17,8 @@ def main(request):
 
 
 
-# USER
+# ---------------------------------------------------USER-----------------------------------------------------------------------
+
 # User show
 @login_required
 @allowed_users(allowed_roles=['admin'])
@@ -27,23 +28,50 @@ def user_detail(request):
     
     return render(request, 'admins/user_detail.html', context)
 
+# User Add
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def add_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        # password2 = request.POST['password2']
+        form = User(username=username, email=email, password=password1)
+        form.save()
+        data = User.objects.all()
+        context = {'status_add': 'success', 'Data': data}
+        return render(request, 'admins/user_detail.html', context)
+        
+    else:
+        return render(request, 'admins/add_user.html')
+
 # User Edit
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def edit_user(request,id):
-    pi = ContactDetail.objects.get(pk=id)
+    pi = User.objects.get(pk=id)
     context = {'Data':pi}
-    print("IN edit User")
     if request.method == "POST":
-        print("IN IFFFF")
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        form = User(username=username, email=email, password=password, id=id)
+        form.save()
+        data = User.objects.all()
+        context = {'status_edit': 'success', 'id': id, 'Data': data}
+        return render(request, 'admins/user_detail.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
         # if form.is_valid():
         #     form.save()
         # else:
         #     pi = UserData.objects.get(pk=id)
         #     form = UserRegistration(instance=pi)
     # return render (request, 'user/edit.html', {'Form': form})
-
-    return render(request, 'admins/home_url',context)
+    else:
+        return render(request, 'admins/edit_user.html',context)
 
 # User Delete
 @login_required
@@ -60,7 +88,9 @@ def delete_user(request, id):
 
 
 
-# CONTACT
+# ------------------------------------------------CONTACT----------------------------------------------------------------------------
+
+
 # Contact Show
 @login_required
 @allowed_users(allowed_roles=['admin'])
@@ -71,6 +101,8 @@ def contact_detail(request):
     return render(request, 'admins/contact_detail.html', context)#
 
 # Contact Add
+@login_required
+@allowed_users(allowed_roles=['admin'])
 def add_contact(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -95,8 +127,8 @@ def add_contact(request):
         return render(request, 'admins/add_contact.html')
 
 # Contact Edit
-# @login_required
-# @allowed_users(allowed_roles=['admin'])
+@login_required
+@allowed_users(allowed_roles=['admin'])
 def edit_contact(request,id):
     pi = ContactDetail.objects.get(pk=id)
     context = {'Data':pi}
@@ -137,7 +169,8 @@ def delete_contact(request, id):
 
 
 
-# AMAZON
+# -----------------------------------------AMAZON-------------------------------------------------------------------------
+
 # Amazon show
 @login_required
 @allowed_users(allowed_roles=['admin'])
@@ -147,12 +180,60 @@ def amazon_deals(request):
     
     return render(request, 'admins/amazon_deals.html', context)
 
+# Amazon Add
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def add_amazon(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        body = request.POST['body']
+        url = request.POST['url']
+        image = request.POST['image']
+        form = AmazonData(title=title, body=body, image=image, url=url)
+        form.save()
+        data = AmazonData.objects.all()
+        context = {'status_add': 'success', 'Data': data}
+        return render(request, 'admins/amazon_deals.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     pi = UserData.objects.get(pk=id)
+        #     form = UserRegistration(instance=pi)
+    # return render (request, 'user/edit.html', {'Form': form})
+    else:
+        return render(request, 'admins/add_amazon.html')
+
 # Amazon Edit
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def edit_amazon(request,id):
-
-    return render(request, 'admins/amazon_deals_url')
+    pi = AmazonData.objects.get(pk=id)
+    context = {'Data':pi}
+    if request.method == "POST":
+        pi = AmazonData.objects.get(pk=id)
+        title = request.POST['title']
+        body = request.POST['body']
+        url = request.POST['url']
+        image = request.POST['image']
+        form = AmazonData(title=title, body=body, image=image, url=url, id=id)
+        form.save()
+        data = AmazonData.objects.all()
+        context = {'status_edit': 'success', 'id': id, 'Data': data}
+        return render(request, 'admins/amazon_deals.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     pi = UserData.objects.get(pk=id)
+        #     form = UserRegistration(instance=pi)
+    # return render (request, 'user/edit.html', {'Form': form})
+    else:
+        return render(request, 'admins/edit_amazon.html',context)
 
 # Amazon Delete
 @login_required
@@ -167,7 +248,8 @@ def delete_amazon(request, id):
 
 
 
-# FLIPKART
+# ---------------------------------------FLIPKART---------------------------------------------------------------------------------
+
 # Flipkart show
 @login_required
 @allowed_users(allowed_roles=['admin'])
@@ -177,12 +259,61 @@ def flipkart_deals(request):
     
     return render(request, 'admins/flipkart_deals.html', context)
 
+# Flipkart Add
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def add_flipkart(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        body = request.POST['body']
+        url = request.POST['url']
+        image = request.POST['image']
+        form = FlipkartData(title=title, body=body, image=image, url=url)
+        form.save()
+        data = FlipkartData.objects.all()
+        context = {'status_add': 'success', 'Data': data}
+        return render(request, 'admins/flipkart_deals.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     pi = UserData.objects.get(pk=id)
+        #     form = UserRegistration(instance=pi)
+    # return render (request, 'user/edit.html', {'Form': form})
+    else:
+        return render(request, 'admins/add_flipkart.html')
+
 # Flipkart Edit
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def edit_flipkart(request,id):
+    pi = FlipkartData.objects.get(pk=id)
+    context = {'Data':pi}
+    if request.method == "POST":
+        pi = FlipkartData.objects.get(pk=id)
+        title = request.POST['title']
+        body = request.POST['body']
+        url = request.POST['url']
+        image = request.POST['image']
+        form = FlipkartData(title=title, body=body, image=image, url=url, id=id)
+        form.save()
+        data = FlipkartData.objects.all()
+        context = {'status_edit': 'success', 'id': id, 'Data': data}
+        return render(request, 'admins/flipkart_deals.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     pi = UserData.objects.get(pk=id)
+        #     form = UserRegistration(instance=pi)
+    # return render (request, 'user/edit.html', {'Form': form})
+    else:
+        return render(request, 'admins/edit_flipkart.html',context)
 
-    return render(request, 'admins/flipkart_deals_url')
 
 # Flipkart Delete
 @login_required
@@ -196,7 +327,8 @@ def delete_flipkart(request, id):
 
 
 
-# SNAPDEAL
+# --------------------------------------SNAPDEAL------------------------------------------------------------
+
 # Snapdeal Show
 @login_required
 @allowed_users(allowed_roles=['admin'])
@@ -206,12 +338,60 @@ def snapdeal_deals(request):
     
     return render(request, 'admins/snapdeal_deals.html', context)
     
+# Snapdeal Add
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def add_snapdeal(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        body = request.POST['body']
+        url = request.POST['url']
+        image = request.POST['image']
+        form = SnapdealData(title=title, body=body, image=image, url=url)
+        form.save()
+        data = SnapdealData.objects.all()
+        context = {'status_add': 'success', 'Data': data}
+        return render(request, 'admins/snapdeal_deals.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     pi = UserData.objects.get(pk=id)
+        #     form = UserRegistration(instance=pi)
+    # return render (request, 'user/edit.html', {'Form': form})
+    else:
+        return render(request, 'admins/add_snapdeal.html')
+
 # Snapdeal Edit
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def edit_snapdeal(request,id):
-
-    return render(request, 'admins/snapdeal_deals_url')
+    pi = SnapdealData.objects.get(pk=id)
+    context = {'Data':pi}
+    if request.method == "POST":
+        pi = SnapdealData.objects.get(pk=id)
+        title = request.POST['title']
+        body = request.POST['body']
+        url = request.POST['url']
+        image = request.POST['image']
+        form = SnapdealData(title=title, body=body, image=image, url=url, id=id)
+        form.save()
+        data =SnapdealData.objects.all()
+        context = {'status_edit': 'success', 'id': id, 'Data': data}
+        return render(request, 'admins/snapdeal_deals.html', context)
+        
+        # pi = ContactDetail.objects.get(pk=id)
+        # print(pi)
+        # if form.is_valid():
+        #     form.save()
+        # else:
+        #     pi = UserData.objects.get(pk=id)
+        #     form = UserRegistration(instance=pi)
+    # return render (request, 'user/edit.html', {'Form': form})
+    else:
+        return render(request, 'admins/edit_snapdeal.html',context)
 
 # Snapdeal Delete
 @login_required

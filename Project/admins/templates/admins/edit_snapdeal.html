@@ -1,0 +1,52 @@
+{% extends 'admins/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+
+
+{% block body_heading %}{% endblock body_heading %}
+
+
+{% block content %}
+    
+    <h2 class="text-center alert btn-dark ">Edit Snapdeal Deal</h2>
+    
+    <div class="col-6 offset-3">
+        {% if Data %}
+            <form action="{% url 'edit_snapdeal_url' Data.id %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Category/Brand/Title"
+                    value={{Data.title}}>
+                </div>
+                <div class="mb-5">
+                    <label for="body" class="form-label">Body Content</label>
+                    <textarea name="body" class="form-control" rows=4 placeholder="Description" value={{Data.body}}></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="url" class="form-label">Add url</label>
+                    <input type="url" class="form-control" id="url" name="url" placeholder="https://www.snapdeal.in/" value={{Data.url}}>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Thumbnail</label>
+                    <input type="file" accept="image/*" id="image" name="image" src="/media" alt="Choose your image" value={{Data.image}}>
+                </div>
+                
+                
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <input onclick="location.href='{% url 'snapdeal_deals_url' %}';" type="button" class="btn btn-secondary mx-4" value="Back"></input>
+                
+                
+            </form>
+        {% else %}
+            <h2 class="text-center alert alert-warning">No Records </h2>
+
+        {% endif %}
+    </div>    
+{% endblock content %}
+
+
+
+
