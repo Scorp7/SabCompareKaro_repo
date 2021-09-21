@@ -51,7 +51,7 @@ class SnapdealData(models.Model):
 class ContactDetail(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
     email = models.EmailField(null=False, blank=False, max_length=100)
-    phone = models.IntegerField(null=False, blank=False, unique=True, max_length=10)
+    phone = models.IntegerField(null=False, blank=False)
     message = models.CharField(max_length=500)
     
     def __str__(self):

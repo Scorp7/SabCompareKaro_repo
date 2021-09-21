@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 
-#MAIN
+#---------------------------------------------MAIN----------------------------------------------------------------------------
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def main(request):
@@ -37,8 +37,11 @@ def add_user(request):
         email = request.POST['email']
         password1 = request.POST['password1']
         # password2 = request.POST['password2']
-        form = User(username=username, email=email, password=password1)
+        form = User(username=username, email=email)
         form.save()
+        pi = User.objects.get(username=username, email=email)
+        pi.set_password(password1)
+        pi.save()
         data = User.objects.all()
         context = {'status_add': 'success', 'Data': data}
         return render(request, 'admins/user_detail.html', context)
@@ -56,8 +59,10 @@ def edit_user(request,id):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        form = User(username=username, email=email, password=password, id=id)
+        form = User(username=username, email=email, id=id)
         form.save()
+        pi.set_password(password)
+        pi.save()
         data = User.objects.all()
         context = {'status_edit': 'success', 'id': id, 'Data': data}
         return render(request, 'admins/user_detail.html', context)
@@ -297,7 +302,7 @@ def edit_flipkart(request,id):
         body = request.POST['body']
         url = request.POST['url']
         image = request.POST['image']
-        form = FlipkartData(title=title, body=body, image=image, url=url, id=id)
+        form = FlipkartData(title=title, body=body, image=image (upload_to = "amazon/card/" ), url=url, id=id)
         form.save()
         data = FlipkartData.objects.all()
         context = {'status_edit': 'success', 'id': id, 'Data': data}

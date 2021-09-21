@@ -18,15 +18,15 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="abc" value={{Data.username}}>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="abc" value={{Data.username}} required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" value={{Data.email}}>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" value={{Data.email}} required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value={{Data.password}}>
+                    <label for="password" class="form-label">New Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
                 </div>
                 
                 <button type="submit" class="btn btn-success">Save Changes</button>

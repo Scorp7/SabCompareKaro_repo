@@ -1,11 +1,13 @@
+from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 import requests
 from .models import AmazonData, ContactDetail, FlipkartData, SnapdealData
 import datetime
-
+from admins.decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -27,6 +29,14 @@ def home(request):
     current = datetime.datetime.now()
     context = {'amazon': amazon, 'flipkart': flipkart, 'snapdeal': snapdeal , 'current': current, 'home': 'active'}
     
+    # if User.is_superuser==True:
+    #     return render(request,'admins/home.html')
+    
+    # if User.is_anonymous:
+    #     return render(request,'user/home.html', context)
+        
+    
+
     return render(request,'user/home.html', context)
 
 def about(request):
@@ -51,7 +61,6 @@ def contact(request):
 def services(request):
     context = {'services': 'active'}
     return render(request,'user/services.html', context)
-    
     
     
 # Using Rapid Api
@@ -119,11 +128,87 @@ def search1(request):
 
     return render(request, 'user/about.html')
     
- 
+ # Using Rapid Api
+
+
+
+@login_required
+def search_result(request):
+    if request.method == "POST":
+        text = request.POST['search_bar']
+        product_keywords = text.split(' ')
+        print(product_keywords)
+
+
+    #AMAZON
+    url = "https://amazon23.p.rapidapi.com/product-search"
+    querystring = {"query":text ,"country":"IN"}
+    headers = {
+        'x-rapidapi-host': "amazon23.p.rapidapi.com",
+        'x-rapidapi-key': "92750849f6msh373fa597cc2a1fcp1660c3jsnddbce4527cbf"
+        }
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
+    # print(response)
+    
+    found=0
+    for i in range(5):
+        title = response['result'][i]['title'].lower()
+            
+        found_keyword = []
+        for keyword in range(len(product_keywords)):
+            if title.find(product_keywords[keyword]) != -1:
+                found_keyword.append(product_keywords[keyword])
+                if found_keyword == product_keywords:
+                    found = 1
+                    # discounted = response['result'][i]['price']['discounted']
+                    # currency = response['result'][i]['price']['currency']
+                    # before_price = response['result'][i]['price']['before_price']
+                    # savings_amount = response['result'][i]['price']['savings_amount']
+                    # savings_percent = response['result'][i]['price']['savings_percent']
+                    current_price = response['result'][i]['price']['current_price']
+                    if current_price==0:
+                        current_price ="OUT OF STOCK"
+                    product_url = response['result'][i]['url']
+                    thumbnail = response['result'][i]['thumbnail']
+                    
+                    amazon = {
+                        # 'discounted' : discounted,
+                        # 'before_price' : before_price,
+                        # 'savings_amount' : savings_amount,
+                        # 'savings_percent' : savings_percent,
+                        # 'currency' : currency, 
+                        'current_price' : current_price,
+                        'product_url' : product_url,
+                        'title' : title,
+                        'thumbnail' : thumbnail,  
+                    }
+                    context = {'1': amazon}
+                    # print(found_keyword," found Product is available")
+                    return render(request,'user/search_result.html', context)
+                    break
+                
+        if found == 1:
+            break
+        else:
+            print(found_keyword ," Product NOT-FOUND")
+                
+    
+    # print(discounted)
+    # print(current_price)
+    # print(currency)
+    # print(before_price)
+    # print(savings_amount)
+    # print(savings_percent)
+    # print(product_url)
+    # print(title)
+    # print(thumbnail)
+
+    return render(request, 'user/search_result.html')
+
 
 @login_required
 # Using Rainforest Api 
-def search_result(request):
+def search_resul(request):
 
     if request.method == 'POST':
         text = request.POST['search_bar']
@@ -131,7 +216,7 @@ def search_result(request):
         print(product_keywords)
         # set up the request parameters
         params = {
-        'api_key': 'D249F3DFEDC24A9183C7878F959A6605',
+        'api_key': 'F61DC2435AE54951AEAC801B09EF29B1',
         'type': 'search',
         'amazon_domain': 'amazon.in',
         'search_term': text

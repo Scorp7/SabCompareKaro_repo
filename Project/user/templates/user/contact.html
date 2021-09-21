@@ -139,35 +139,37 @@ Contact
                     
                     <div class="mb-4">
                         <label for="name" class="form-label mt-4"></label>
-                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}}>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}} required>
                         {% comment %} {{form.name|add_class:"form-control"|attr:"placeholder:Email Or Phone"|attr:'id':"name"}}
                         {{form.name.errors}} 
                         {% render_field form.email %} {% endcomment %}
                     </div>
                     <div class="mb-4">
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}}>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}} required>
                     </div>
                     
                     {% else %}
                     
                     <div class="mb-4">
                         <label for="name" class="form-label mt-4"></label>
-                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}}>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}} required>
                         {% comment %} {{form.name|add_class:"form-control"|attr:"placeholder:Email Or Phone"|attr:'id':"name"}}
                         {{form.name.errors}} 
                         {% render_field form.email %} {% endcomment %}
                     </div>
                     <div class="mb-4">
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}}>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}} required>
                     </div>
                     
                     {% endif %}
 
                     <div class="mb-4">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
+                        {% comment %} <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" min=9999999999 max=9999999999> {% endcomment %}
+                        <input type="tel" class="form-control" name="phone" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Mobile number" >
+                        
                     </div>
                     <div class="mb-4">
-                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message"></textarea>
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message" required></textarea>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-warning mt-md-3 px-5 w-40 rounded-pill" >Submit</button>
