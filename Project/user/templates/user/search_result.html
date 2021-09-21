@@ -12,7 +12,6 @@ Search Result
 
 
 
-
 {% block content %}  
 
     <div class="container my-2 ">
@@ -27,13 +26,13 @@ Search Result
                     <div class="row">
                     
                         <div class="col-8">
-                            <span class="fs-3 ">{{title}}</span> <br> 
-                            <span class="fs-4 fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, sapiente ipsa! Dolores harum rem nemo perspiciatis tempora sint facilis error?</span> <br> <br>
-                            <a href="{{product_url}}" style="text-decoration:none;font-size:20px"> I want to buy this <span style="font-size:28px">»</span> </a>
+                            <span class="fs-3 ">{{1.title}}</span> <br> 
+                            <span class="fs-4 fw-light">{{1.current_price}}</span> <br> <br>
+                            <a href="{{1.product_url}}" style="text-decoration:none;font-size:20px"> I want to buy this <span style="font-size:28px">»</span> </a>
                         </div>
                         
                         <div class="col-3 offset-1 me-0 pe-0">
-                            <img class=""src={{thumbnail}} style="height:250px; width:200px">
+                            <img class=""src={{1.thumbnail}} style="height:250px; width:200px">
                         </div>
                         
                     </div> 

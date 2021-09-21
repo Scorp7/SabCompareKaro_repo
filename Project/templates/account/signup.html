@@ -142,12 +142,13 @@ Sign Up
         <div class="card login-card">
             <div class="row no-gutters">
                 <div class="col-md-5">
-                    <img src="{% static 'images/login.jpg' %}" alt="login" class="login-card-img">
+                    <img src={% static 'user/images/login_card.jpg' %} alt="login" class="login-card-img">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                        <div class="brand-wrapper">
-                            <img src="{% static 'images/logo.svg' %}" alt="logo" class="logo">
+                        <div class="brand-wrapper mb-5">
+                            <a href={% url 'home_url' %} ><img src="{% static 'user/images/logo.png' %}" alt="logo" class="logo" >
+                            </a>
                         </div>
                         <p class="login-card-description">Register a new account</p>
                         <form class="signup" method="POST" id="signup_form" >
@@ -155,23 +156,23 @@ Sign Up
                             
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email</label>
-                                    {{form.email|add_class:"form-control"|attr:"placeholder:Email address"|attr:"id:id_email"}}
+                                    {{form.email|add_class:"form-control"|attr:"placeholder:Email address"|attr:"id:id_email"|attr:"required"}}
                                     {{form.email.errors}}
                             </div>
                             <div class="form-group">
                                 <label for="text" class="sr-only">Username</label>
-                                    {{form.username|add_class:"form-control"|attr:"placeholder:Phone no."|attr:"id:id_username"}}
+                                    {{form.username|add_class:"form-control"|attr:"placeholder:Username."|attr:"id:id_username"|attr:"required"}}
                                     {{form.username.errors}}
                                     
                             </div>
                             <div class="form-group mb-4">
                                 <label for="password" class="sr-only">Password</label>
-                                    {{form.password1|add_class:"form-control"|attr:"placeholder:Password"|attr:"id:id_password1"}}
+                                    {{form.password1|add_class:"form-control"|attr:"placeholder:Password"|attr:"id:id_password1"|attr:"required"}}
                                     {{form.password1.errors}}
                             </div>
                             <div class="form-group mb-4">
                                 <label for="password2" class="sr-only">Password again</label>
-                                    {{form.password2|add_class:"form-control"|attr:"placeholder:Re-enter password*"|attr:"id:id_password2"}}
+                                    {{form.password2|add_class:"form-control"|attr:"placeholder:Re-enter password*"|attr:"id:id_password2"|attr:"required"}}
                                     {{form.password2.errors}}
                             </div>
                             {% if redirect_field_value %}

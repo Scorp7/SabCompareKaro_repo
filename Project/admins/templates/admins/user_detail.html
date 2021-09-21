@@ -9,48 +9,49 @@
 {% block content %}
 
         <h2 class="text-center alert btn-dark ">Show User Data</h2>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
-            <a href={% url 'add_user_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
-        </div>
-        
-        {% if Data %}
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">User_name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Password</th>
-                </tr>
-                </thead>
+        <div class="mx-2">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
+                <a href={% url 'add_user_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
+            </div>
+            
+            {% if Data %}
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">User_name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                    </tr>
+                    </thead>
 
-                <tbody>
-                    {% for dt in Data %}
-                        <tr>
-                            <th scope="row">{{dt.id}}</th>
-                            <td>{{dt.username}}</td>
-                            <td>{{dt.email}}</td>
-                            <td>{{dt.password}}</td>
-                            <td>
-                                <a href="{% url 'edit_user_url' dt.id %}" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
-                            </td>
+                    <tbody>
+                        {% for dt in Data %}
+                            <tr>
+                                <th scope="row">{{dt.id}}</th>
+                                <td>{{dt.username}}</td>
+                                <td>{{dt.email}}</td>
+                                <td>{{dt.password}}</td>
+                                <td>
+                                    <a href="{% url 'edit_user_url' dt.id %}" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
+                                </td>
+                                
+                                <td>
+                                    <form action="{% url 'delete_user_url' dt.id %}" method="POST" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
                             
-                            <td>
-                                <form action="{% url 'delete_user_url' dt.id %}" method="POST" class="d-inline">
-                                    {% csrf_token %}
-                                    <input type="submit" class="btn btn-danger" value="Delete">
-                                </form>
-                            </td>
-                        </tr>
-                        
-                    {% endfor %}
-                </tbody>
-                
-            </table>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
 
-        {% else %}
-            <h2 class="text-center alert alert-warning">No Records </h2>
-
+            {% else %}
+                <h2 class="text-center alert alert-warning">No Records </h2>
+    </div>
         {% endif %}
         
 {% endblock content %}

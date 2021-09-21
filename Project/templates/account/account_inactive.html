@@ -142,12 +142,13 @@ Account Inactive
         <div class="card login-card">
             <div class="row no-gutters">
                 <div class="col-md-5">
-                    <img src="{% static 'images/login.jpg' %}" alt="login" class="login-card-img">
+                    <img src={% static 'user/images/login_card.jpg' %} alt="login" class="login-card-img">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
                         <div class="brand-wrapper">
-                            <img src="{% static 'images/logo.svg' %}" alt="logo" class="logo">
+                            <a href={% url 'home_url' %} ><img src="{% static 'user/images/logo.png' %}" alt="logo" class="logo">
+                            </a>
                         </div>
                         <p class="login-card-description">This account is inactive</p>
                     </div>
