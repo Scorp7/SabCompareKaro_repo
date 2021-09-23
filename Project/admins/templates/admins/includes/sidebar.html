@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="logo-details" >
-        <a href={% url 'main_url' %} ><i class='bx bx-check-shield icon' ></i></a>
+        <a href={% url 'home_url' %} ><i class='bx bx-check-shield icon' ></i></a>
         
         <div class="logo_name">
             {% comment %} <img src="{% static 'user/images/logo.png' %}" height='30' width='100' alt=""></a>
@@ -25,6 +25,14 @@
             <span class="tooltip">Dashboard</span>
         </li>
         {% endcomment %}
+        
+        <li class={{home}}>
+        <a href={% url 'main_url' %} >
+            <i class='bx bx-home' ></i>
+            <span class="links_name ">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+        </li>
         
         <li class={{user}}>
         <a href={% url 'user_detail_url' %} >
@@ -85,11 +93,16 @@
             <div class="profile-details">
             <i class='bx bxs-user-account' ></i>
             <div class="name_job">
-                <div class="name">Admin</div>
+                {% if request.user.is_authenticated %}
+                    <div class="name">{{request.user}}</div>
+                {% else %}
+                <div class="name">Please Login</div>
+                {% endif %}
                 {% comment %} <div class="job">Admin</div> {% endcomment %}
             </div>
             </div>
             <a href={% url 'account_logout' %}><i class='bx bx-log-out' id="log_out" ></i></a>
+            <span class="tooltip">Logout</span>
             
         </li>
     </ul>

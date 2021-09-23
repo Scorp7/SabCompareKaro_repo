@@ -1,164 +1,118 @@
 {% extends 'admins/base.html' %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}Home{% endblock title %}
 
-{% block body_heading %}Welcome to Admin Panel {% endblock body_heading %}
+{% block body_heading %} {% endblock body_heading %}
 
 {% block content %}
-  <div class="container my-3 ">
-      <p class="lead "><h3>Amazon</h3></p>
+  <h2 class="text-center alert btn-primary mb-5">Welcome to Admin Panel</h2>
+
+  <div class="container my-5" >
+      <p class="lead "><h3><u>User</u> </h3></p>
+      <div class="album py-3 bg-light shadow-lg" >
+        <div class="container " >
+
+          <div class="row row-cols-6 row-cols-sm-2 row-cols-md-3 g-3">
+            
+              <div class="col p-3 ">
+                <div class="card shadow-sm border border-dark">
+                  <div class="card-body ">
+                    <p class="cart-title px-2 lead"><b>User Data</b></p>
+                    <p class="card-text px-2 ">Here Admin can <a href={% url 'user_detail_url' %} class="text-reset "><u>Edit</u></a>  Existing User's detail , Admin can <a href={% url 'add_user_url' %} class="text-reset "><u>Add</u></a> new deal's and Also <a href={% url 'user_detail_url' %} class="text-reset "><u>Delete</u></a> the data which exist  </p>
+                    <div class="d-flex justify-content-between align-items-center px-2">
+                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px" class="mt-4"> Add / Edit Existing Users  </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+               
+          </div> 
+          
+        </div>
+      </div>
+      <br><br>
+      
+      <p class=" "><h3> <u>Amazon Data</u> </h3></p>
       <div class="album py-3 bg-light shadow-lg ">
         <div class="container ">
 
           <div class="row row-cols-6 row-cols-sm-2 row-cols-md-3 g-3">
             
               <div class="col p-3">
-                <div class="card shadow-sm">
-                  <img src="" alt="">
-
+                <div class="card shadow-sm border border-dark">
                   <div class="card-body ">
-                    <p class="cart-title px-2">User</p>
-                  <p class="card-text px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque laudantium ex explicabo iure dolorem nisi perspiciatis reprehenderit rem maxime? Illum quaerat porro, consectetur quasi sit cupiditate saepe molestiae? Harum..</p>
+                    <p class="cart-title px-2 "><span class="border  px-3 py-1 rounded-pill  btn-dark"> Advertisment</span></p> <br>
+                    <p class="card-text px-2 ">Here Admin can <a href={% url 'amazon_deals_url' %} class="text-reset "><u>Edit</u></a>  Existing Amazon's deals , Admin can <a href={% url 'add_amazon_url' %} class="text-reset "><u>Add</u></a> new deal's and Also <a href={% url 'amazon_deals_url' %} class="text-reset "><u>Delete</u></a> the data which exist  </p>
                     <div class="d-flex justify-content-between align-items-center px-2">
-                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px"> I want this <span style="font-size:22px">»</span> </a>
-                        <small class="text-muted">Today</small>
+                      <a href={% url 'amazon_deals_url' %} style="text-decoration:none;font-size:18px" class="mt-4"> View Available deals  </a>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="col p-3">
-                <div class="card shadow-sm">
-                  <img src="" alt="">
-
-                  <div class="card-body ">
-                    <p class="cart-title px-2">User</p>
-                  <p class="card-text px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque laudantium ex explicabo iure dolorem nisi perspiciatis reprehenderit rem maxime? Illum quaerat porro, consectetur quasi sit cupiditate saepe molestiae? Harum..</p>
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px"> I want this <span style="font-size:22px">»</span> </a>
-                        <small class="text-muted">Today</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              
-            
+               
           </div> 
           
         </div>
       </div>
-      <br>
+      <br><br>
       
-      <p class="lead "><h3>Amazon</h3></p>
+      <p class=" "><h3> <u>Snapdeal Data</u> </h3></p>
       <div class="album py-3 bg-light shadow-lg ">
         <div class="container ">
 
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="row row-cols-6 row-cols-sm-2 row-cols-md-3 g-3">
             
               <div class="col p-3">
-                <div class="card shadow-sm">
-                  <img src="" alt="">
-
+                <div class="card shadow-sm border border-dark">
                   <div class="card-body ">
-                    <p class="cart-title px-2">User</p>
-                  <p class="card-text px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque laudantium ex explicabo iure dolorem nisi perspiciatis reprehenderit rem maxime? Illum quaerat porro, consectetur quasi sit cupiditate saepe molestiae? Harum..</p>
+                    <p class="cart-title px-2 "><span class="border  px-3 py-1 rounded-pill  btn-dark"> Advertisment</span></p> <br>
+                    <p class="card-text px-2 ">Here Admin can <a href={% url 'snapdeal_deals_url' %} class="text-reset "><u>Edit</u></a>  Existing Snapdeal's deals , Admin can <a href={% url 'add_snapdeal_url' %} class="text-reset "><u>Add</u></a> new deal's and Also <a href={% url 'snapdeal_deals_url' %} class="text-reset "><u>Delete</u></a> the data which exist  </p>
                     <div class="d-flex justify-content-between align-items-center px-2">
-                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px"> I want this <span style="font-size:22px">»</span> </a>
-                        <small class="text-muted">Today</small>
+                      <a href={% url 'snapdeal_deals_url' %} style="text-decoration:none;font-size:18px" class="mt-4"> View Available deals  </a>
                     </div>
                   </div>
                 </div>
               </div>
-            
+              
+               
           </div> 
+          
         </div>
       </div>
-      <br>
+      <br><br>
       
       
-      <p class="lead "><h3>Amazon</h3></p>
+      <p class=""><h3> <u>Flipkart Data</u> </h3></p>
       <div class="album py-3 bg-light shadow-lg ">
         <div class="container ">
 
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="row row-cols-6 row-cols-sm-2 row-cols-md-3 g-3">
             
               <div class="col p-3">
-                <div class="card shadow-sm">
-                  <img src="" alt="">
-
+                <div class="card shadow-sm border border-dark">
                   <div class="card-body ">
-                    <p class="cart-title px-2">User</p>
-                  <p class="card-text px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque laudantium ex explicabo iure dolorem nisi perspiciatis reprehenderit rem maxime? Illum quaerat porro, consectetur quasi sit cupiditate saepe molestiae? Harum..</p>
+                    <p class="cart-title px-2 "><span class="border  px-3 py-1 rounded-pill  btn-dark"> Advertisment</span></p> <br>
+                    <p class="card-text px-2 ">Here Admin can <a href={% url 'flipkart_deals_url' %} class="text-reset "><u>Edit</u></a>  Existing Flipkart's deals , Admin can <a href={% url 'add_flipkart_url' %} class="text-reset "><u>Add</u></a> new deal's and Also <a href={% url 'flipkart_deals_url' %} class="text-reset "><u>Delete</u></a> the data which exist  </p>
                     <div class="d-flex justify-content-between align-items-center px-2">
-                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px"> I want this <span style="font-size:22px">»</span> </a>
-                        <small class="text-muted">Today</small>
+                      <a href={% url 'flipkart_deals_url' %} style="text-decoration:none;font-size:18px" class="mt-4"> View Available deals  </a>
                     </div>
                   </div>
                 </div>
               </div>
-            
+              
+               
           </div> 
+          
         </div>
       </div>
-      <br>
+      <br><br>
       
       
       
-      <p class="lead "><h3>Amazon</h3></p>
-      <div class="album py-3 bg-light shadow-lg ">
-        <div class="container ">
-
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            
-              <div class="col p-3">
-                <div class="card shadow-sm">
-                  <img src="" alt="">
-
-                  <div class="card-body ">
-                    <p class="cart-title px-2">User</p>
-                  <p class="card-text px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque laudantium ex explicabo iure dolorem nisi perspiciatis reprehenderit rem maxime? Illum quaerat porro, consectetur quasi sit cupiditate saepe molestiae? Harum..</p>
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px"> I want this <span style="font-size:22px">»</span> </a>
-                        <small class="text-muted">Today</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-          </div> 
-        </div>
-      </div>
-      <br>
-      
-      
-      
-      <p class="lead "><h3>Amazon</h3></p>
-      <div class="album py-3 bg-light shadow-lg ">
-        <div class="container ">
-
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            
-              <div class="col p-3">
-                <div class="card shadow-sm">
-                  <img src="" alt="">
-
-                  <div class="card-body ">
-                    <p class="cart-title px-2">User</p>
-                  <p class="card-text px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam itaque laudantium ex explicabo iure dolorem nisi perspiciatis reprehenderit rem maxime? Illum quaerat porro, consectetur quasi sit cupiditate saepe molestiae? Harum..</p>
-                    <div class="d-flex justify-content-between align-items-center px-2">
-                      <a href={% url 'user_detail_url' %} style="text-decoration:none;font-size:18px"> I want this <span style="font-size:22px">»</span> </a>
-                        <small class="text-muted">Today</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-          </div> 
-        </div>
-      </div>
-      <br>
+     
   </div>
 {% endblock content %}
 

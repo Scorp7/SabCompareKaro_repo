@@ -7,7 +7,32 @@
 
 
 {% block content %}
-
+    {% if status_edit %}
+            
+            <div class="alert alert-warning alert-dismissible fade show"  role="alert">
+                <strong>SUCCESS!!!</strong> &nbsp&nbsp Saved Changes for Data id: {{id}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+        {% endif %}
+        
+        {% if status_add %}
+            
+            <div class="alert alert-success alert-dismissible fade show"  role="alert">
+                <strong>SUCCESS!!!</strong> &nbsp&nbsp Added New Entry
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+        {% endif %}
+        {% if status_delete %}
+            
+            <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+                <strong>SUCCESS!!!</strong> &nbsp&nbsp Deleted the User
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+        {% endif %}
+        
         <h2 class="text-center alert btn-dark ">Show User Data</h2>
         <div class="mx-2">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
