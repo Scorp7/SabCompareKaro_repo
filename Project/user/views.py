@@ -67,220 +67,6 @@ def services(request):
     return render(request,'user/services.html', context)
     
     
-# Using Rapid Api
-def search1(request):
-
-    url = "https://amazon23.p.rapidapi.com/product-search"
-    querystring = {"query":"poco m3","country":"IN"}
-    headers = {
-        'x-rapidapi-host': "amazon23.p.rapidapi.com",
-        'x-rapidapi-key': "08565f93abmsh46d2e48f99ae72ap1a660ajsnb1138a79da69"
-        }
-    response = requests.request("GET", url, headers=headers, params=querystring).json()
-    print(response)
-    
-    found=0
-    
-    product_keywords = [ 'm3', '6gb', '64gb','blue']
-    for i in range(10):
-        title = response['result'][i]['title'].lower()
-            
-        found_keyword = []
-        for keyword in range(len(product_keywords)):
-            if title.find(product_keywords[keyword]) != -1:
-                found_keyword.append(product_keywords[keyword])
-                if found_keyword == product_keywords:
-                    found = 1
-                    discounted = response['result'][i]['price']['discounted']
-                    current_price = response['result'][i]['price']['current_price']
-                    currency = response['result'][i]['price']['currency']
-                    before_price = response['result'][i]['price']['before_price']
-                    savings_amount = response['result'][i]['price']['savings_amount']
-                    savings_percent = response['result'][i]['price']['savings_percent']
-                    product_url = response['result'][i]['url']
-                    thumbnail = response['result'][i]['thumbnail']
-                    
-                    return_product_detail = {
-                        'discounted' : discounted,
-                        'current_price' : current_price,
-                        'before_price' : before_price,
-                        'savings_amount' : savings_amount,
-                        'savings_percent' : savings_percent,
-                        'product_url' : product_url,
-                        'title' : title,
-                        'thumbnail' : thumbnail,  
-                        'currency' : currency 
-                    }
-                    print(found_keyword," found Product is available")
-                    break
-                
-        if found == 1:
-            break
-        else:
-            print(found_keyword ," Product NOT-FOUND")
-                
-    
-    # print(discounted)
-    # print(current_price)
-    # print(currency)
-    # print(before_price)
-    # print(savings_amount)
-    # print(savings_percent)
-    # print(product_url)
-    # print(title)
-    # print(thumbnail)
-
-    return render(request, 'user/about.html')
-    
- # Using Rapid Api
-
-
-# In use
-# @login_required
-def search_resul(request):
-    if request.method == "POST":
-        text = request.POST['search_bar']
-        product_keywords = text.split(' ')
-        print(product_keywords)
-        
-        #Used for flipkart in it's url
-        words = ''
-        for i in product_keywords:
-            words = words+"%20"+i
-        words = words[3:]
-
-
-    #AMAZON (Rapid_Api)
-    url = "https://amazon23.p.rapidapi.com/product-search"
-    querystring = {"query":text ,"country":"IN"}
-    headers = {
-        'x-rapidapi-host': "amazon23.p.rapidapi.com",
-        'x-rapidapi-key': "48014ab8e4mshb99b235e40187f9p168a0ejsn06c539de05d7"
-        }
-    response = requests.request("GET", url, headers=headers, params=querystring).json()
-    # print(response)
-    
-    if response['totalProducts']:
-        found_amazon = 0
-        for i in range(5):
-            title = response['result'][i]['title'].lower()
-                
-            found_keyword = []
-            for keyword in range(len(product_keywords)):
-                if title.find(product_keywords[keyword]) != -1:
-                    found_keyword.append(product_keywords[keyword])
-                    if found_keyword == product_keywords:
-                        found_amazon = 1
-                        # discounted = response['result'][i]['price']['discounted']
-                        # currency = response['result'][i]['price']['currency']
-                        # before_price = response['result'][i]['price']['before_price']
-                        # savings_amount = response['result'][i]['price']['savings_amount']
-                        # savings_percent = response['result'][i]['price']['savings_percent']
-                        current_price = response['result'][i]['price']['current_price']
-                        if current_price==0:
-                            current_price ="OUT OF STOCK"
-                        product_url = response['result'][i]['url']
-                        thumbnail = response['result'][i]['thumbnail']
-                        
-                        amazon = {
-                            # 'discounted' : discounted,
-                            # 'before_price' : before_price,
-                            # 'savings_amount' : savings_amount,
-                            # 'savings_percent' : savings_percent,
-                            # 'currency' : currency, 
-                            'site_name': 'Amazon',
-                            'current_price' : current_price,
-                            'product_url' : product_url,
-                            'title' : title,
-                            'thumbnail' : thumbnail,  
-                        }
-                        
-                        # context = {'1': amazon}
-                        # # print(found_keyword," found Product is available")
-                        # return render(request,'user/search_result.html', context)
-                        break
-                    
-            if found_amazon == 1:
-                break 
-            else:
-                print(found_keyword ," Product NOT-FOUND")
-        
-    else:
-        found_amazon = 0
-                   
-    
-    
-    # Flipkart
-    url = "https://www.flipkart.com/search?q="+words+"&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
-    value = []
-    response = requests.get(url)
-    scrapval = bs4.BeautifulSoup(response.text,"html.parser")
-    if True:
-        found_flipkart = 0
-        for data in scrapval.find_all('div', attrs={"class": "_4rR01T"}):   
-            tmp = str(data)
-            title = tmp[21:-6].lower()
-            found_keyword = []
-            for keyword in range(len(product_keywords)):
-                if title.find(product_keywords[keyword]) != -1:
-                    found_keyword.append(product_keywords[keyword])
-                    if found_keyword == product_keywords:
-                        found_flipkart = 1
-                        # discounted = response['result'][i]['price']['discounted']
-                        # currency = response['result'][i]['price']['currency']
-                        # before_price = response['result'][i]['price']['before_price']
-                        # savings_amount = response['result'][i]['price']['savings_amount']
-                        # savings_percent = response['result'][i]['price']['savings_percent']
-                        current_price = scrapval.find('div', attrs={"class": "_30jeq3 _1_WHN1"})               
-                        current_price = str(current_price)[30:-6]
-                        current_price = current_price.replace(',', '')
-                        if current_price==0:
-                            current_price ="OUT OF STOCK"
-                            
-                        thumbnail = scrapval.find('img', attrs={"class": "_396cs4 _3exPp9"})               
-                        thumbnail = str(thumbnail.get('src'))
-                        
-                        product_url = scrapval.find('a', attrs={"class": "_1fQZEK"})
-                        product_url = str(product_url.get('href'))
-                        product_url = "https://www.flipkart.com"+product_url
-                        
-                        
-                        flipkart = {
-                            'site_name': 'Flipkart',
-                            'current_price' : current_price,
-                            'product_url' : product_url,
-                            'title' : title,
-                            'thumbnail' : thumbnail,  
-                        }
-                        break
-                    
-            if found_flipkart == 1:
-                break
-            else:
-                print(found_keyword ," Product NOT-FOUND")
-        
-    else:
-        found_flipkart=0
-        
-        
-    #Comparing    
-    if found_amazon==1 and found_flipkart==1:
-        if int(amazon['current_price']) <= int(flipkart['current_price']):
-            context = {'1':amazon,'2':flipkart}
-        elif int(amazon['current_price']) > int(flipkart['current_price']):
-            context = {'1':flipkart, '2':amazon}
-    elif found_amazon==1 or found_flipkart==1:
-        if found_amazon==1:
-            context = {'1':amazon}
-        elif found_flipkart==1:
-            context = {'1':flipkart}
-    else:
-        context = {'not_found':1}  
-
-    return render(request, 'user/search_result.html', context)
-
-
-# @login_required
 # Using Rainforest Api 
 def search_resul(request):
 
@@ -355,7 +141,223 @@ def search_resul(request):
 
     return render(request, 'user/search_result.html')
     
+  
     
+# Using Rapid Api (Only amazon data)
+def search_resul(request):
+
+    url = "https://amazon23.p.rapidapi.com/product-search"
+    querystring = {"query":"poco m3","country":"IN"}
+    headers = {
+        'x-rapidapi-host': "amazon23.p.rapidapi.com",
+        'x-rapidapi-key': "08565f93abmsh46d2e48f99ae72ap1a660ajsnb1138a79da69"
+        }
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
+    print(response)
+    
+    found=0
+    
+    product_keywords = [ 'm3', '6gb', '64gb','blue']
+    for i in range(10):
+        title = response['result'][i]['title'].lower()
+            
+        found_keyword = []
+        for keyword in range(len(product_keywords)):
+            if title.find(product_keywords[keyword]) != -1:
+                found_keyword.append(product_keywords[keyword])
+                if found_keyword == product_keywords:
+                    found = 1
+                    discounted = response['result'][i]['price']['discounted']
+                    current_price = response['result'][i]['price']['current_price']
+                    currency = response['result'][i]['price']['currency']
+                    before_price = response['result'][i]['price']['before_price']
+                    savings_amount = response['result'][i]['price']['savings_amount']
+                    savings_percent = response['result'][i]['price']['savings_percent']
+                    product_url = response['result'][i]['url']
+                    thumbnail = response['result'][i]['thumbnail']
+                    
+                    return_product_detail = {
+                        'discounted' : discounted,
+                        'current_price' : current_price,
+                        'before_price' : before_price,
+                        'savings_amount' : savings_amount,
+                        'savings_percent' : savings_percent,
+                        'product_url' : product_url,
+                        'title' : title,
+                        'thumbnail' : thumbnail,  
+                        'currency' : currency 
+                    }
+                    print(found_keyword," found Product is available")
+                    break
+                
+        if found == 1:
+            break
+        else:
+            print(found_keyword ," Product NOT-FOUND")
+                
+    
+    # print(discounted)
+    # print(current_price)
+    # print(currency)
+    # print(before_price)
+    # print(savings_amount)
+    # print(savings_percent)
+    # print(product_url)
+    # print(title)
+    # print(thumbnail)
+
+    return render(request, 'user/about.html')
+    
+ # Using Rapid Api
+
+
+
+# In use
+# Amazon Rapid Api &&& Flipkart webscraping
+def search_resul(request):
+    if request.method == "POST":
+        text = request.POST['search_bar']
+        product_keywords = text.split(' ')
+        print(product_keywords)
+        
+        #Used for flipkart in it's url
+        words = ''
+        for i in product_keywords:
+            words = words+"%20"+i
+        words = words[3:]
+
+
+    #AMAZON (Rapid_Api)
+    url = "https://amazon23.p.rapidapi.com/product-search"
+    querystring = {"query":text ,"country":"IN"}
+    headers = {
+        'x-rapidapi-host': "amazon23.p.rapidapi.com",
+        'x-rapidapi-key': "48014ab8e4mshb99b235e40187f9p168a0ejsn06c539de05d7"
+        }
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
+    # print(response)
+    
+    if response['totalProducts']:
+        found_amazon = 0
+        for i in range(6):
+            title = response['result'][i]['title'].lower()
+                
+            found_keyword = []
+            for keyword in range(len(product_keywords)):
+                if title.find(product_keywords[keyword]) != -1:
+                    found_keyword.append(product_keywords[keyword])
+                    if found_keyword == product_keywords:
+                        found_amazon = 1
+                        # discounted = response['result'][i]['price']['discounted']
+                        # currency = response['result'][i]['price']['currency']
+                        # before_price = response['result'][i]['price']['before_price']
+                        # savings_amount = response['result'][i]['price']['savings_amount']
+                        # savings_percent = response['result'][i]['price']['savings_percent']
+                        current_price = response['result'][i]['price']['current_price']
+                        if current_price==0:
+                            current_price ="0"
+                        product_url = response['result'][i]['url']
+                        thumbnail = response['result'][i]['thumbnail']
+                        
+                        amazon = {
+                            # 'discounted' : discounted,
+                            # 'before_price' : before_price,
+                            # 'savings_amount' : savings_amount,
+                            # 'savings_percent' : savings_percent,
+                            # 'currency' : currency, 
+                            'site_name': 'Amazon',
+                            'current_price' : current_price,
+                            'product_url' : product_url,
+                            'title' : title,
+                            'thumbnail' : thumbnail,  
+                        }
+                        
+                        # context = {'1': amazon}
+                        # # print(found_keyword," found Product is available")
+                        # return render(request,'user/search_result.html', context)
+                        break
+                    
+            if found_amazon == 1:
+                break 
+            else:
+                print(found_keyword ," Product NOT-FOUND")
+        
+    else:
+        found_amazon = 0
+                   
+    
+    
+    # Flipkart
+    url = "https://www.flipkart.com/search?q="+words+"&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+    value = []
+    response = requests.get(url)
+    scrapval = bs4.BeautifulSoup(response.text,"html.parser")
+    if True:
+        found_flipkart = 0
+        for data in scrapval.find_all('div', attrs={"class": "_4rR01T"}):   
+            tmp = str(data)
+            title = tmp[21:-6].lower()
+            found_keyword = []
+            for keyword in range(len(product_keywords)):
+                if title.find(product_keywords[keyword]) != -1:
+                    found_keyword.append(product_keywords[keyword])
+                    if found_keyword == product_keywords:
+                        found_flipkart = 1
+                        # discounted = response['result'][i]['price']['discounted']
+                        # currency = response['result'][i]['price']['currency']
+                        # before_price = response['result'][i]['price']['before_price']
+                        # savings_amount = response['result'][i]['price']['savings_amount']
+                        # savings_percent = response['result'][i]['price']['savings_percent']
+                        current_price = scrapval.find('div', attrs={"class": "_30jeq3 _1_WHN1"})               
+                        current_price = str(current_price)[30:-6]
+                        current_price = current_price.replace(',', '')
+                        if current_price==0:
+                            current_price ="0"
+                            
+                        thumbnail = scrapval.find('img', attrs={"class": "_396cs4 _3exPp9"})               
+                        thumbnail = str(thumbnail.get('src'))
+                        
+                        product_url = scrapval.find('a', attrs={"class": "_1fQZEK"})
+                        product_url = str(product_url.get('href'))
+                        product_url = "https://www.flipkart.com"+product_url
+                        
+                        
+                        flipkart = {
+                            'site_name': 'Flipkart',
+                            'current_price' : current_price,
+                            'product_url' : product_url,
+                            'title' : title,
+                            'thumbnail' : thumbnail,  
+                        }
+                        break
+                    
+            if found_flipkart == 1:
+                break
+            else:
+                print(found_keyword ," Product NOT-FOUND")
+        
+    else:
+        found_flipkart=0
+        
+        
+    #Comparing    
+    if found_amazon==1 and found_flipkart==1:
+        if int(amazon['current_price']) <= int(flipkart['current_price']):
+            context = {'1':amazon,'2':flipkart}
+        elif int(amazon['current_price']) > int(flipkart['current_price']):
+            context = {'1':flipkart, '2':amazon}
+    elif found_amazon==1 or found_flipkart==1:
+        if found_amazon==1:
+            context = {'1':amazon}
+        elif found_flipkart==1:
+            context = {'1':flipkart}
+    else:
+        context = {'not_found':1}  
+
+    return render(request, 'user/search_result.html', context)
+
+
+  
 # USING WEB SCRAPING (AMAZON AND FLIPKART)
 def search_resul(request):
     if request.method == "POST":
@@ -390,7 +392,7 @@ def search_resul(request):
                         current_price = str(current_price)[28:-7]
                         current_price = current_price.replace(',', '')
                         if current_price==0:
-                            current_price ="OUT OF STOCK"
+                            current_price ="0"
                             
                         thumbnail = scrapval.find('img', attrs={"class": "s-image"})
                         thumbnail = str(thumbnail.get('src'))
@@ -439,7 +441,7 @@ def search_resul(request):
                         current_price = str(current_price)[30:-6]
                         current_price = current_price.replace(',', '')
                         if current_price==0:
-                            current_price ="OUT OF STOCK"
+                            current_price ="0"
                             
                         thumbnail = scrapval.find('img', attrs={"class": "_396cs4 _3exPp9"})               
                         thumbnail = str(thumbnail.get('src'))
@@ -479,14 +481,12 @@ def search_resul(request):
     
     
     
-    
-    
 # Scraping from flipkart    
 import requests
 import bs4 
-def search_result(request):
+def search_resul(request):
+    context = {"not_found":"1"}
     if request.method == 'POST':
-        context = {"not_found":"1"}
         text = request.POST['search_bar']
         product_keywords = text.split(' ')
         words = ''
@@ -515,7 +515,8 @@ def search_result(request):
                         current_price = str(current_price)[30:-6]
                         current_price = current_price.replace(',', '')
                         if current_price==0:
-                            current_price ="OUT OF STOCK"
+                            current_price ="0"
+                        # current_price = 0
                             
                         thumbnail = scrapval.find('img', attrs={"class": "_396cs4 _3exPp9"})               
                         thumbnail = str(thumbnail.get('src'))
@@ -546,9 +547,9 @@ def search_result(request):
 # Scraping from amazon   
 import requests
 import bs4 
-def search_resul(request):
+def search_result(request):
+    context = {'not_found': '1'}
     if request.method == 'POST':
-        context = {'not_found': '1'}
         text = request.POST['search_bar']
         product_keywords = text.split(' ')
         words = ''
@@ -577,7 +578,8 @@ def search_resul(request):
                         current_price = str(current_price)[28:-7]
                         current_price = current_price.replace(',', '')
                         if current_price==0:
-                            current_price ="OUT OF STOCK"
+                            current_price ="0"
+                        # current_price = 0
                             
                         thumbnail = scrapval.find('img', attrs={"class": "s-image"})
                         thumbnail = str(thumbnail.get('src'))
