@@ -6,13 +6,15 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from admins.decorators import allowed_users
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import urllib
 
 
 #---------------------------------------------MAIN----------------------------------------------------------------------------
 @login_required
 @allowed_users(allowed_roles=['admin'])
 def main(request):
-    return render(request, 'admins/home.html')
+    context = {"home":'active'}
+    return render(request, 'admins/home.html',context)
 
 
 
@@ -85,7 +87,9 @@ def delete_user(request, id):
     if request.method == "POST":
         pi = User.objects.get(pk=id)
         pi.delete()
-        return redirect('/admins/user_detail/')
+        data = User.objects.all()
+        context = {'status_delete': 'success', 'Data': data}
+        return render(request, 'admins/user_detail.html', context)
 
 
 
@@ -167,7 +171,9 @@ def delete_contact(request, id):
     if request.method == "POST":
         pi = ContactDetail.objects.get(pk=id)
         pi.delete()
-        return redirect('/admins/contact_detail/')
+        data = ContactDetail.objects.all()
+        context = {'status_delete': 'success', 'Data': data}
+        return render(request, 'admins/contact_detail.html', context)
 
 
 
@@ -247,8 +253,9 @@ def delete_amazon(request, id):
     if request.method == "POST":
         pi = AmazonData.objects.get(pk=id)
         pi.delete()
-        return redirect('/admins/amazon_deals')
-
+        data = AmazonData.objects.all()
+        context = {'status_delete': 'success', 'Data': data}
+        return render(request, 'admins/amazon_deals.html', context)
 
 
 
@@ -327,7 +334,9 @@ def delete_flipkart(request, id):
     if request.method == "POST":
         pi = FlipkartData.objects.get(pk=id)
         pi.delete()
-        return redirect('/admins/flipkart_deals')
+        data = FlipkartData.objects.all()
+        context = {'status_delete': 'success','Data': data}
+        return render(request, 'admins/flipkart_deals.html', context)
 
 
 
@@ -405,8 +414,9 @@ def delete_snapdeal(request, id):
     if request.method == "POST":
         pi = SnapdealData.objects.get(pk=id)
         pi.delete()
-        return redirect('/admins/snapdeal_deals')
-
+        data =SnapdealData.objects.all()
+        context = {'status_delete': 'success', 'Data': data}
+        return render(request, 'admins/snapdeal_deals.html', context)
     
     
     
