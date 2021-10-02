@@ -196,10 +196,10 @@ def amazon_deals(request):
 @allowed_users(allowed_roles=['admin'])
 def add_amazon(request):
     if request.method == "POST":
-        title = request.POST['title']
-        body = request.POST['body']
-        url = request.POST['url']
-        image = request.POST['image']
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        url = request.POST.get('url')
+        image = request.FILES.get('image')
         form = AmazonData(title=title, body=body, image=image, url=url)
         form.save()
         data = AmazonData.objects.all()
@@ -225,10 +225,10 @@ def edit_amazon(request,id):
     context = {'Data':pi}
     if request.method == "POST":
         pi = AmazonData.objects.get(pk=id)
-        title = request.POST['title']
-        body = request.POST['body']
-        url = request.POST['url']
-        image = request.POST['image']
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        url = request.POST.get('url')
+        image = request.FILES.get('image')
         form = AmazonData(title=title, body=body, image=image, url=url, id=id)
         form.save()
         data = AmazonData.objects.all()
@@ -276,10 +276,10 @@ def flipkart_deals(request):
 @allowed_users(allowed_roles=['admin'])
 def add_flipkart(request):
     if request.method == "POST":
-        title = request.POST['title']
-        body = request.POST['body']
-        url = request.POST['url']
-        image = request.POST['image']
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        url = request.POST.get('url')
+        image = request.FILES.get('image')
         form = FlipkartData(title=title, body=body, image=image, url=url)
         form.save()
         data = FlipkartData.objects.all()
@@ -305,11 +305,11 @@ def edit_flipkart(request,id):
     context = {'Data':pi}
     if request.method == "POST":
         pi = FlipkartData.objects.get(pk=id)
-        title = request.POST['title']
-        body = request.POST['body']
-        url = request.POST['url']
-        image = request.POST['image']
-        form = FlipkartData(title=title, body=body, image=image (upload_to = "amazon/card/" ), url=url, id=id)
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        url = request.POST.get('url')
+        image = request.FILES.get('image')
+        form = FlipkartData(title=title, body=body, image=image, url=url, id=id)
         form.save()
         data = FlipkartData.objects.all()
         context = {'status_edit': 'success', 'id': id, 'Data': data}
@@ -357,10 +357,10 @@ def snapdeal_deals(request):
 @allowed_users(allowed_roles=['admin'])
 def add_snapdeal(request):
     if request.method == "POST":
-        title = request.POST['title']
-        body = request.POST['body']
-        url = request.POST['url']
-        image = request.POST['image']
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        url = request.POST.get('url')
+        image = request.FILES.get('image')
         form = SnapdealData(title=title, body=body, image=image, url=url)
         form.save()
         data = SnapdealData.objects.all()
@@ -386,10 +386,10 @@ def edit_snapdeal(request,id):
     context = {'Data':pi}
     if request.method == "POST":
         pi = SnapdealData.objects.get(pk=id)
-        title = request.POST['title']
-        body = request.POST['body']
-        url = request.POST['url']
-        image = request.POST['image']
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        url = request.POST.get('url')
+        image = request.FILES.get('image')
         form = SnapdealData(title=title, body=body, image=image, url=url, id=id)
         form.save()
         data =SnapdealData.objects.all()

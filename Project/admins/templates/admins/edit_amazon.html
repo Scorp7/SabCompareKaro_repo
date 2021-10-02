@@ -14,16 +14,16 @@
     
     <div class="col-6 offset-3">
         {% if Data %}
-            <form action="{% url 'edit_amazon_url' Data.id %}" method="POST">
+            <form action="{% url 'edit_amazon_url' Data.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="name" class="form-label">Title</label>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Category/Brand/Title"
-                    value={{Data.title}}>
+                    value={{Data.title}} required>
                 </div>
                 <div class="mb-3">
                     <label for="body" class="form-label">Body Content</label>
-                    <textarea name="body" class="form-control" rows=4 placeholder="Description"> {{Data.body}}</textarea>
+                    <textarea name="body" class="form-control" rows=4 placeholder="Description" required> {{Data.body}}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="url" class="form-label">Add url</label>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Thumbnail {{Data.image}}</label>
-                    <input type="file" accept="image/*" id="image" name="image" alt="Choose your image"}>
+                    <input type="file" accept="image/*" id="image" name="image" alt="Choose your image" required>
                 </div>
                 
                 

@@ -156,20 +156,20 @@ Contact
                     
                     <div class="mb-4">
                         <label for="name" class="form-label mt-4"></label>
-                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" value={{user.username}} required>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" required value={{user.username}} >
                         {% comment %} {{form.name|add_class:"form-control"|attr:"placeholder:Email Or Phone"|attr:'id':"name"}}
                         {{form.name.errors}} 
                         {% render_field form.email %} {% endcomment %}
                     </div>
                     <div class="mb-4">
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address" value={{user.email}} required>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email address"  required value={{user.email}} >
                     </div>
                     
                     {% endif %}
 
                     <div class="mb-4">
                         {% comment %} <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" min=9999999999 max=9999999999> {% endcomment %}
-                        <input type="tel" class="form-control" name="phone" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Mobile number" >
+                        <input type="tel" class="form-control" name="phone" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Mobile number (10-digit)"required >
                         
                     </div>
                     <div class="mb-4">
