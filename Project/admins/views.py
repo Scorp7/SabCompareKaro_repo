@@ -37,12 +37,12 @@ def add_user(request):
     if request.method == "POST":
         username = request.POST['username']
         email = request.POST['email']
-        password1 = request.POST['password1']
-        # password2 = request.POST['password2']
+        password = request.POST['password']
+        # password2 = request.POST['confirm_password']
         form = User(username=username, email=email)
         form.save()
         pi = User.objects.get(username=username, email=email)
-        pi.set_password(password1)
+        pi.set_password(password)
         pi.save()
         data = User.objects.all()
         context = {'status_add': 'success', 'Data': data}

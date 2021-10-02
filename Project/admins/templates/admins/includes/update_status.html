@@ -1,0 +1,30 @@
+   
+    {% comment %} #This will be executed if user edits data (returned 'status_edit' from 'views') {% endcomment %}
+    {% if status_edit %}
+        
+        <div class="alert alert-warning alert-dismissible fade show"  role="alert">
+            <strong>SUCCESS!!!</strong> &nbsp&nbsp Saved Changes for Data id: {{id}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {% endif %}
+    
+    {% comment %} #This will be executed if user adds data (returned 'status_add' from 'views') {% endcomment %}
+    {% if status_add %}
+        
+        <div class="alert alert-success alert-dismissible fade show"  role="alert">
+            <strong>SUCCESS!!!</strong> &nbsp&nbsp Added New Entry
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {% endif %}
+    
+    {% comment %} #This will be executed if user deletes data (returned 'status_delete' from 'views') {% endcomment %}
+    {% if status_delete %}
+        
+        <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+            <strong>SUCCESS!!</strong> &nbsp&nbsp Deleted a Deal
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {% endif %}
