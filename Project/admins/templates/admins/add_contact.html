@@ -15,21 +15,26 @@
     <div class="col-6 offset-3">
             <form action="{% url 'add_contact_url' %}" method="POST">
                 {% csrf_token %}
+                <br> <br>
+                
                 <div class="mb-3">
                     <label for="name" class="form-label" >Name</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="abc" required>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="john" required>
                 </div>
+                
                 <div class="mb-3">
                     <label for="email" class="form-label" >Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="john@org.com" required>
                 </div>
+                
                 <div class="mb-3">
                     <label for="phone" class="form-label">Phone</label>
                     <input type="tel" class="form-control" name="phone" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Mobile number (10-digit)" required>
                 </div>
+                
                 <div class="mb-5">
                     <label for="exampleInputPassword1" class="form-label">Message</label>
-                    <textarea name="message" class="form-control" rows=4 placeholder="Enter your concern here" required></textarea>
+                    <textarea name="message" class="form-control" rows=4 placeholder="Let us know about your concern here" required></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-success">Add </button>

@@ -12,21 +12,33 @@
     
     <h2 class="text-center alert btn-dark ">Edit User Detail</h2>
     
+    {% comment %} #Code for form {% endcomment %}
     <div class="col-6 offset-3">
         {% if Data %}
-            <form action="{% url 'edit_user_url' Data.id %}" method="POST">
+            <form action="{% url 'edit_user_url' Data.id %}" method="POST" onsubmit ="return verifyPassword()">
                 {% csrf_token %}
+                 
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="abc" value={{Data.username}} required>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="john" value={{Data.username}} required>
                 </div>
+                
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" value={{Data.email}} required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="john@org.com" value={{Data.email}} required>
                 </div>
+                
                 <div class="mb-3">
                     <label for="password" class="form-label">New Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="New Password" required>
+                    <span id = "message" style="color:red;font-size:16px"> </span>
+                </div>
+                 
+    
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter Password*" required>
+                    <span id = "c_message" style="color:red;font-size:16px"> </span>
                 </div>
                 
                 <button type="submit" class="btn btn-success">Save Changes</button>
@@ -41,6 +53,55 @@
     </div>    
 {% endblock content %}
 
+{% block extrajs %}
 
+{% comment %} #Javascript code for password validation and confirm_password field {% endcomment %}
+<script>  
+    function verifyPassword() {  
+        let pw = document.getElementById("password").value;
+        let c_pw = document.getElementById("confirm_password").value;  
+        //check empty password field  
+        if(pw == "") {  
+            document.getElementById("message").innerHTML = "";
+            document.getElementById("c_message").innerHTML = "";
+            document.getElementById("message").innerHTML = "**Password field is empty!";  
+            document.getElementById("password").focus();
+            document.getElementById("password").select();
+            return false;  
+        }  
+        
+        //minimum password length validation  
+        if(pw.length < 8) {  
+            document.getElementById("message").innerHTML = "";
+            document.getElementById("c_message").innerHTML = "";
+            document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+            document.getElementById("password").focus();
+            document.getElementById("password").select();
+            return false;  
+        }  
+        
+        //check empty confirm_password field  
+        if(c_pw == "") {  
+            document.getElementById("message").innerHTML = "";
+            document.getElementById("c_message").innerHTML = ""; 
+            document.getElementById("c_message").innerHTML = "**Password field is empty!"; 
+            document.getElementById("confirm_password").focus(); 
+            document.getElementById("confirm_password").select();
+            return false;  
+        }
+        
+            //maximum length of password validation  
+        if(c_pw!=pw) {  
+            document.getElementById("message").innerHTML = "";
+            document.getElementById("c_message").innerHTML = "";    
+            document.getElementById("c_message").innerHTML = "**Password fields does not matched"; 
+            document.getElementById("confirm_password").focus();
+            document.getElementById("confirm_password").select(); 
+            return false;  
+        }   
+    }  
+</script>
+
+{% endblock extrajs %}
 
 

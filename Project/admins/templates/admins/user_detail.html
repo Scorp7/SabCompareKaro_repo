@@ -7,77 +7,64 @@
 
 
 {% block content %}
-    {% if status_edit %}
-            
-            <div class="alert alert-warning alert-dismissible fade show"  role="alert">
-                <strong>SUCCESS!!!</strong> &nbsp&nbsp Saved Changes for Data id: {{id}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            
-        {% endif %}
+    
+    {% comment %} #Included Status code to view the alert message, if admin modify, add or delete a entry {% endcomment %}
+    {% include 'admins/includes/update_status.html' %}
+    
+    
+    {% comment %} #Content shown on the 'user_detail' page {% endcomment %}
+    <h2 class="text-center alert btn-dark ">Show User Data</h2>
+    
+    <div class="mx-2">
         
-        {% if status_add %}
-            
-            <div class="alert alert-success alert-dismissible fade show"  role="alert">
-                <strong>SUCCESS!!!</strong> &nbsp&nbsp Added New Entry
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            
-        {% endif %}
-        {% if status_delete %}
-            
-            <div class="alert alert-danger alert-dismissible fade show"  role="alert">
-                <strong>SUCCESS!!!</strong> &nbsp&nbsp Deleted the User
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            
-        {% endif %}
+        {% comment %} #"Add_New" button {% endcomment %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
+            <a href={% url 'add_user_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
+        </div>
         
-        <h2 class="text-center alert btn-dark ">Show User Data</h2>
-        <div class="mx-2">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mx-3">
-                <a href={% url 'add_user_url' %} class="btn btn-success px-5"  role="button">+ &nbsp&nbsp Add_New </a>
-            </div>
-            
-            {% if Data %}
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">User_name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
-                    </tr>
-                    </thead>
+        {% comment %} # IF data is present in database table then this will be excuted or 'else' block will be executed{% endcomment %}
+        {% if Data %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">User_name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                </tr>
+                </thead>
 
-                    <tbody>
-                        {% for dt in Data %}
-                            <tr>
-                                <th scope="row">{{dt.id}}</th>
-                                <td>{{dt.username}}</td>
-                                <td>{{dt.email}}</td>
-                                <td>{{dt.password}}</td>
-                                <td>
-                                    <a href="{% url 'edit_user_url' dt.id %}" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
-                                </td>
-                                
-                                <td>
-                                    <form action="{% url 'delete_user_url' dt.id %}" method="POST" class="d-inline">
-                                        {% csrf_token %}
-                                        <input type="submit" class="btn btn-danger" value="Delete">
-                                    </form>
-                                </td>
-                            </tr>
+                <tbody>
+                    {% for dt in Data %}
+                        <tr>
+                            <th scope="row">{{dt.id}}</th>
+                            <td>{{dt.username}}</td>
+                            <td>{{dt.email}}</td>
+                            <td>{{dt.password}}</td>
+                            <td>
+                                <a href="{% url 'edit_user_url' dt.id %}" class="btn btn-warning btn-login px-4 py-2 btn-sm">Edit </a>
+                            </td>
                             
-                        {% endfor %}
-                    </tbody>
-                    
-                </table>
+                            <td>
+                                <form action="{% url 'delete_user_url' dt.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                </tbody>
+                
+            </table>
 
-            {% else %}
-                <h2 class="text-center alert alert-warning">No Records </h2>
-    </div>
+        
+        {% else %}
+            <h2 class="text-center alert alert-warning">No Records </h2>
         {% endif %}
+        
+    </div>
+        
         
 {% endblock content %}
 

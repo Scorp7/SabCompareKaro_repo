@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-
+# ONlY USER PRESENT IN ADMIN GROUP WILL BE AUTHORIZED
 def allowed_users(allowed_roles=[]):
     def decorator(view_func):
         def wrapper_func(request, *args, **kwargs):

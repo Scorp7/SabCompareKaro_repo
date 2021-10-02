@@ -8,8 +8,6 @@
     
     <title> Admin | {% block title %} {% endblock title %} | SabCompareKaro </title>
     
-    
-    <link rel="stylesheet" href="">
     <link rel="stylesheet" href="{% static 'admins/css/style.css' %}">
 
     <!-- Boxicons CDN Link -->
@@ -19,28 +17,38 @@
     {% comment %} Bootstrap 5 {% endcomment %}
     <link rel="stylesheet" href={% static 'admins/css/bootstrap.min.css' %}>
      
-     {% block css %}{% endblock css %}
+     {% block css %}
+     {% endblock css %}
      
 
    </head>
 <body>
   
+  {% comment %} #Included sidebar from 'includes' directory {% endcomment %}
   {% include 'admins/includes/sidebar.html' %}
   
+  {% comment %} #Home/Body section present on right of sidebar {% endcomment %}
   <section class="home-section">
-
+      
+      {% comment %} #Navigation bar body section {% endcomment %}
       <nav class="navbar navbar-light bg-light" >
         <div class="container-fluid">
+        
+          {% comment %} #LOGO Section of navbar         {% endcomment %}
           <a href={% url 'main_url' %} class="my-2" ><img src={% static 'user/images/logo.png' %} alt="" height=40 width=200></a>
+          
+          {% comment %} #Header section of navbar {% endcomment %}
           <center class=" mb-0 h2 my-3 mx-auto" style="text-align:center;">{% block body_heading %}Heading{% endblock body_heading %}</center>
         
-        {% if request.user.is_authenticated %}
-                <div class="me-2">
-                    <div class="btn-group">
-                        <strong class="fs-5 mt-md-2 me-md-5 text-capitalize"> Hello&nbsp {{request.user}} </strong>
-                    </div>
-                </div>
-        {% endif %}
+          {% comment %} #User name to be displayed on righthand corner if user is an authenticated user {% endcomment %}
+          {% if request.user.is_authenticated %}
+                  <div class="me-2">
+                      <div class="btn-group">
+                          <strong class="fs-5 mt-md-2 me-md-5 text-capitalize"> Hello&nbsp {{request.user}} </strong>
+                      </div>
+                  </div>
+          {% endif %}
+        
         </div>
       </nav>
     
@@ -50,11 +58,11 @@
   </section>
   
     
-    
-
 
 <script src="{% static 'admins/js/custom.js' %}"></script>
-{% block extrajs %}{% endblock extrajs %}
+
+{% block extrajs %}
+{% endblock extrajs %}
   
   
 </body>

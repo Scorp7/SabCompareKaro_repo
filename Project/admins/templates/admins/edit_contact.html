@@ -16,21 +16,26 @@
         {% if Data %}
             <form action="{% url 'edit_contact_url' Data.id %}" method="POST">
                 {% csrf_token %}
+                <br> <br>
+                
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" value={{Data.name}} required>
+                    <input type="text" class="form-control" name="name" id="name" value={{Data.name}} required placeholder="john">
                 </div>
+                
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" value={{Data.email}} required>
+                    <input type="email" class="form-control" name="email" id="email" value={{Data.email}} required placeholder="john@org.com">
                 </div>
+                
                 <div class="mb-3">
                     <label for="phone" class="form-label">Phone</label>
                     <input type="tel" class="form-control" name="phone" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="Mobile number (10-digit)"  value={{Data.phone}} >
                 </div>
+                
                 <div class="mb-5">
                     <label for="exampleInputPassword1" class="form-label"  >Message</label>
-                    <textarea name="message" class="form-control" required rows=4 required placeholder="Enter your concern here">{{Data.message}}</textarea>
+                    <textarea name="message" class="form-control" required rows=4 required placeholder="Let us know about your concern here">{{Data.message}}</textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-success">Save Changes</button>
