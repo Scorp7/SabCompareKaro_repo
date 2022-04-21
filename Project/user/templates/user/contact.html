@@ -1,7 +1,7 @@
 {% extends 'user/base.html' %}
 {% load static %}
 {% load widget_tweaks %}
-
+{% load crispy_forms_tags %}
 
 
 {% block title %} 
@@ -135,7 +135,17 @@ Contact
         
         <div class="col-8 second-col col-sm-8 col-md-8 col-xl-4 col-lg-6  ">
             <div class="right-col py-2 mt-3 ms-0 ">
-                <form method="POST" class="m-3">
+            
+                <form method="post" class="m-3">
+                    {% csrf_token %}
+                    <h3 class="title text-center mt-md-4 ">Contact us</h3>
+                    {{ form|crispy }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning mt-md-3 px-5 w-40 rounded-pill" >Submit</button>
+                    </div>
+                </form>
+                
+                <!--<form method="POST" class="m-3">
                     {% csrf_token %}
                     <h3 class="title text-center mt-md-4 ">Contact us</h3>
                     
@@ -178,7 +188,7 @@ Contact
                     <div class="text-center">
                         <button type="submit" class="btn btn-warning mt-md-3 px-5 w-40 rounded-pill" >Submit</button>
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
         

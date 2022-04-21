@@ -61,10 +61,12 @@ def edit_user(request,id):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+        print(username,email,password)
         form = User(username=username, email=email, id=id)
         form.save()
         pi.set_password(password)
         pi.save()
+        print(User.objects.get(pk=id))
         data = User.objects.all()
         context = {'status_edit': 'success', 'id': id, 'Data': data}
         return render(request, 'admins/user_detail.html', context)

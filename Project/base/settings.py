@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     
     #EXTRAS
     'widget_tweaks',
+    'crispy_forms',
     
 
 
@@ -94,8 +95,8 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
-EMAIL_HOST = 'mail.orgved.com'
-EMAIL_HOST_USER = 'test@orgved.com'
+EMAIL_HOST = 'mail.sabcomparekaro.com'
+EMAIL_HOST_USER = 'test@sck.com'
 EMAIL_HOST_PASSWORD = 'Test@Test.Com'
 EMAIL_PORT = 465
 

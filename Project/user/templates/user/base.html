@@ -12,17 +12,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     
-    
     {% comment %} Custom CSS  {% endcomment %}
     <link rel="stylesheet" href={% static 'user/css/custom.css' %}>
     
-    
-    
-    
-
-    
     <title> {% block title %}  Title {% endblock title %} | SabCompareKaro</title> 
-    
     
     <style>
       .nav-collapse{background-color:#1C2331}
@@ -48,9 +41,6 @@
   
     {% comment %} NavBar  {% endcomment %}
     {% include 'user/includes/navbar.html' %}
-    
-
-
     
     
     {% block content %}  

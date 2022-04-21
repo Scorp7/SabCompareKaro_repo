@@ -8,7 +8,7 @@ from .models import AmazonData, ContactDetail, FlipkartData, SnapdealData
 import datetime
 from admins.decorators import allowed_users
 from django.contrib.auth.decorators import login_required
-
+from .forms import ContactUsForm
 import requests
 import bs4
 
@@ -25,6 +25,7 @@ import bs4
 #     return render(request,'user/home.html', context)
 
 
+#Home Page
 def home(request):
 
     amazon = AmazonData.objects.all()
@@ -43,11 +44,14 @@ def home(request):
 
     return render(request,'user/home.html', context)
 
+#About Page
 def about(request):
     context = {'about': 'active'}
     return render(request,'user/services.html', context)
 
+
 def contact(request):
+    form = ContactUsForm()
     saved = False
     if request.method == "POST":   
         nm = request.POST["name"]
@@ -58,16 +62,36 @@ def contact(request):
         ins.save()
         saved = True
         
-    context = {'contact': 'active', 'saved': saved}
+    context = {'contact': 'active', 'saved': saved, 'form': form}
         
     return render(request,'user/contact.html', context)
+        
+
+
+#Contact Page
+# def contact(request):
+#     saved = False
+#     if request.method == "POST":   
+#         nm = request.POST["name"]
+#         em = request.POST["email"]
+#         ph = request.POST["phone"]
+#         msg = request.POST["message"]
+#         ins = ContactDetail(name=nm, email=em, phone=ph, message=msg)
+#         ins.save()
+#         saved = True
+        
+#     context = {'contact': 'active', 'saved': saved}
+        
+#     return render(request,'user/contact.html', context)
     
+#Services Page
 def services(request):
     context = {'services': 'active'}
     return render(request,'user/services.html', context)
     
-    
-# Using Rainforest Api 
+
+
+# Using Rainforest Api (Only Amazon Data)
 def search_resul(request):
 
     if request.method == 'POST':
@@ -142,7 +166,6 @@ def search_resul(request):
     return render(request, 'user/search_result.html')
     
   
-    
 # Using Rapid Api (Only amazon data)
 def search_resul(request):
 
@@ -213,7 +236,7 @@ def search_resul(request):
 
 
 # In use
-# Amazon Rapid Api &&& Flipkart webscraping
+# (Amazon Rapid Api &&& Flipkart webscraping)
 def search_resul(request):
     if request.method == "POST":
         text = request.POST['search_bar']
@@ -650,11 +673,7 @@ def search_result(request):
     return render(request, 'user/search_result.html', context)
 
    
-    
-    
 # Scraping from flipkart    
-import requests
-import bs4 
 def search_resul(request):
     context = {"not_found":"1"}
     if request.method == 'POST':
@@ -758,10 +777,7 @@ def search_resul(request):
     return render(request,'user/search_result.html',context)
 
 
-   
 # Scraping from amazon   
-import requests
-import bs4 
 def search_resul(request):
     context = {'not_found': '1'}
     if request.method == 'POST':
