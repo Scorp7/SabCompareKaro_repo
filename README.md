@@ -14,8 +14,8 @@
 ### To Run the Project
 Prerequisite 
 > Installed python, Installed Django
-1. Clone [Sab Compare Karo]()
-2. Create a virtual environment, install the required packages from [requirements.txt]()
+1. Clone [Sab Compare Karo](https://github.com/abhishek-mehta2k/SabCompareKaro)
+2. Create a virtual environment, install the required packages from [requirements.txt](https://github.com/abhishek-mehta2k/SabCompareKaro/blob/main/Project/requirements.txt)
 
 ---
 ### Working on
